@@ -2,22 +2,22 @@
     <div class="Film-items">
         <h2>热映电影</h2>
         <t-row>
-            <t-col v-for="i in 8" :key="i" :sm="12" :md="4" :lg="3" :xl="3">
+            <t-col v-for="(item,index) in filmItem" :key="index" :sm="12" :md="4" :lg="3" :xl="3">
                 <div class="Film-item">
                     <a href="#">
                         <div class="block-images position-relative">
                             <div class="img-box">
-                                <img src="../assets/film2.jpg" class="img-fluid" alt="">
+                                <img :src="item.img" class="img-fluid" alt="">
                             </div>
                             <div class="block-description">
-                                <h2>人生大事</h2>
+                                <h2>{{item.nm}}</h2>
                                 <div class="movie-time align-items-center">
-                                    <div class="badge badge-secondary">09+</div>
-                                    <span class="text-white">1h 45m</span>
+                                    <div class="badge badge-secondary">{{item.sc}}+</div>
+                                    <span class="text-white">{{item.comingTitle}}</span>
                                 </div>
                                 <div class="hover-buttons">
                                     <span class="btn btn-hover">
-                                        Play Now
+                                        {{item.star}}
                                     </span>
                                 </div>
                             </div>
@@ -38,14 +38,17 @@
 
 <script>
 import axios from 'axios'
+import movieData from '@/assets/movieData'
 export default {
+    name:"FilmItem",
     data() {
         return {
             filmItem: []
         }
     },
     mounted() {
-        this.getFilm();
+        // this.getFilm();
+        this.tempgetFilm();
     },
     methods: {
         getFilm() {
@@ -57,6 +60,13 @@ export default {
                     console.log("请求乌拉", error);
                 }
             );
+        },
+        tempgetFilm(){
+            let arr = movieData.movieList;
+            for(let i=0;i<8;i++){
+                this.filmItem.push(arr[i])
+            }
+            console.log(this.filmItem);
         }
     }
 
@@ -83,6 +93,7 @@ export default {
 
         transition: all 0.45s ease 0s;
         overflow: hidden;
+        height: 50vh;
 
         &::before {
             position: absolute;
@@ -101,8 +112,11 @@ export default {
 
 
         .img-box {
+            width: 350px;
+            height: 100%;
             .img-fluid {
                 width: 350px;
+                height: 100%;
                 border-radius: 10px;
             }
         }
@@ -115,7 +129,7 @@ export default {
         left: 25px;
         top: 0;
         bottom: 0;
-        z-index: 999;
+        z-index: 9;
         display: flex;
         justify-content: center;
         flex-direction: column;
@@ -128,7 +142,7 @@ export default {
         left: auto;
         bottom: 0;
         right: 10px;
-        z-index: 999;
+        z-index: 9;
         display: flex;
         align-items: center;
         opacity: 0;

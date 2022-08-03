@@ -3,16 +3,13 @@
     <div class="tdesign-demo-item--layout">
       <t-layout>
         <!-- background-color="#06121e"  -->
-        <t-header height="1px" >
+        <t-header height="0.1px" >
           <HeaderNav></HeaderNav>
           <!-- <t-head-menu theme="light" value="item1" height="78px">
           </t-head-menu> -->
         </t-header>
         <t-content style="background:#06121e;">
-          <div>
-            <FirstSwiper></FirstSwiper>
-            <FilmItem></FilmItem>
-          </div>
+          <router-view></router-view>
         </t-content>
         <t-footer style="background:#0b1a2a; padding:2rem 6%;">
           <FooterView></FooterView>
@@ -28,16 +25,12 @@
 <script>
 import HeaderNav from './components/HeaderNav.vue'
 import FooterView from './components/FooterView.vue'
-import FirstSwiper from './components/FirstSwiper.vue'
-import FilmItem from './components/FilmItem.vue'
 
 export default {
   name: 'App',
   components: {
     HeaderNav,
-    FooterView,
-    FirstSwiper,
-    FilmItem
+    FooterView
 }
 
 }
@@ -67,7 +60,6 @@ export default {
   border-top:2px dashed #233A50;
   color: #D1D0CF;
   font-size: 14px;
-  // padding-bottom: 2rem;
   margin-top: 2rem;
   padding-top:1.5rem;
 }

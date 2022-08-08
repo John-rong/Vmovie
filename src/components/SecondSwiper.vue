@@ -5,7 +5,7 @@
                 <SwiperWord :filmMsg="filmMsg"></SwiperWord>
             </t-col>
             <t-col :xs="1" :sm="1" :md="8" :lg="8" :xl="8">
-                <div class="parallax-img">
+                <div class="parallax-img" @click="toDetail">
                     <img src="@/assets/f3.jpg" />
                 </div>
             </t-col>
@@ -28,7 +28,12 @@ export default {
             }
         };
     },
-    components: { SwiperWord }
+    components: { SwiperWord },
+    methods: {
+        toDetail(){
+            this.$router.push('/DetailPage')
+        }
+    }
 }
 </script>
 

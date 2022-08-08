@@ -23,8 +23,8 @@
         <t-menu-item value="2-4" @click="toDetail">冒险</t-menu-item>
         <t-menu-item value="2-5" @click="toDetail">爱情</t-menu-item>
       </t-submenu>
-      <t-menu-item value="item1">电影评价</t-menu-item>
-      <t-menu-item value="item2">共创共享</t-menu-item>
+      <t-menu-item value="item1" @click="toRanking">排行榜</t-menu-item>
+      <t-menu-item value="item2">电影评价</t-menu-item>
       <t-menu-item value="item3">联系我们</t-menu-item>
       <template #operations>
         <a class="nav_lcon nav_search" @dblclick="toSearch" @keyup.enter="toSearch">
@@ -125,6 +125,9 @@ export default {
     },
     toDetail(){
       this.$router.push('/DetailPage');
+    },
+    toRanking(){
+      this.$router.push('/RankingList')
     },
     goHome() {
       this.$router.push('/HomePage');

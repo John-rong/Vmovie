@@ -2,7 +2,7 @@
     <div class="Film-items">
         <h2>热映电影</h2>
         <t-row>
-            <t-col v-for="(item,index) in filmItem" :key="index" :sm="12" :md="4" :lg="3" :xl="3">
+            <t-col v-for="(item, index) in filmItem" :key="index" :sm="12" :md="4" :lg="3" :xl="3">
                 <div class="Film-item">
                     <a href="#">
                         <div class="block-images position-relative">
@@ -10,14 +10,14 @@
                                 <img :src="item.img" class="img-fluid" alt="">
                             </div>
                             <div class="block-description">
-                                <h2>{{item.nm}}</h2>
+                                <h2>{{ item.nm }}</h2>
                                 <div class="movie-time align-items-center">
-                                    <div class="badge badge-secondary">{{item.sc}}+</div>
-                                    <span class="text-white">{{item.comingTitle}}</span>
+                                    <div class="badge badge-secondary">{{ item.sc }}+</div>
+                                    <span class="text-white">{{ item.comingTitle }}</span>
                                 </div>
                                 <div class="hover-buttons">
                                     <span class="btn btn-hover">
-                                        {{item.star}}
+                                        {{ item.star }}
                                     </span>
                                 </div>
                             </div>
@@ -38,17 +38,22 @@
 
 <script>
 import axios from 'axios'
-import movieData from '@/assets/movieData'
+import { movieOnInfoList } from '@/api';
 export default {
-    name:"FilmItem",
+    name: "FilmItem",
     data() {
         return {
             filmItem: []
         }
     },
+    props: ['filmNum'],
     mounted() {
-        // this.getFilm();
-        this.tempgetFilm();
+        //获取热映电影
+        try {
+            this.tempgetFilm();
+        } catch (error) {
+            this.$message.error('热映电影获取失败'+error);
+        }
     },
     methods: {
         getFilm() {
@@ -61,12 +66,37 @@ export default {
                 }
             );
         },
-        tempgetFilm(){
-            let arr = movieData.movieList;
-            for(let i=0;i<8;i++){
-                this.filmItem.push(arr[i])
+        //随机打乱顺序,返回任意一个电影
+        shuffle(arr) {
+            const f = [...arr];
+            for (let i = f.length; i > 0; i--) {
+                const rand = Math.floor(Math.random() * i);
+                [f[rand], f[i - 1]] = [f[i - 1], f[rand]];
             }
-            console.log(this.filmItem);
+            return f;
+        },
+        //获取热播电影
+        async tempgetFilm() {
+            let InfoList = await movieOnInfoList();
+            let arr = InfoList.movieList;
+            if (arr.length !=0 || arr != undefined) {
+                //保存用户信息
+                if (this.filmNum == undefined) {
+                    let num = 8;
+                    for (let i = 0; i < num; i++) {
+                        this.filmItem.push(arr[i])
+                    }
+                } else {
+                    const newarr = this.shuffle(arr);
+                    for (let i = 0; i < this.filmNum; i++) {
+                        this.filmItem.push(newarr[i])
+                    }
+                }
+                console.log(this.filmItem);
+                return 'ok';
+            } else {
+                return Promise.reject(new Error('faile'));
+            }
         }
     }
 
@@ -114,6 +144,7 @@ export default {
         .img-box {
             width: 350px;
             height: 100%;
+
             .img-fluid {
                 width: 350px;
                 height: 100%;

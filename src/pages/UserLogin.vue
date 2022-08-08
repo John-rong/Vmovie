@@ -69,13 +69,16 @@ export default {
         },
         //用户注册
         async userRegister() {
+            if(!this.email || !this.password || !this.password2)  return this.$message('error', '邮箱&密码 不能为空');
             try {
                 //若为空 则不提交
                 const { email, password, password2 } = this;
                 (email && password == password2) && (await this.$store.dispatch('userRegister', { email, password }));
+                this.$message('error', '邮箱有误或两次密码不一致...');
                 this.change();
             } catch (error) {
                 this.$message('error', '暂时无法注册...')
+                this.change();
                 console.log(error)
             }
 

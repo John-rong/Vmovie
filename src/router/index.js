@@ -73,13 +73,14 @@ router.beforeEach(async (to, from, next) => {
                     MessagePlugin.warning('登录失效，请重新登录...');
                     await store.dispatch('userLogout');
                     next('/UserLogin');
+                    
                 }
                 next();
             }
         }
     } else {
         //未登录 主页和login和搜索放行
-        if (to.path === '/HomePage' || to.path === '/UserLogin' || to.path === '/DetailSearch') {
+        if (to.path === '/HomePage' || to.path === '/UserLogin' || to.path === '/DetailPage' || to.path === '/RankingList') {
             next();
         } else {
             MessagePlugin.info('请先进行登录...');

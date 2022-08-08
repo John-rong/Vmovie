@@ -17,6 +17,17 @@ import router from '@/router'
 //引入仓库
 import store from '@/store'
 
+//引入图片懒加载
+import VueLazyload from 'vue-lazyload'
+const loadimage = require('./assets/loader-circle-regular-24.png')
+const errorimage = require('./assets/vlogo.png')
+Vue.use(VueLazyload, {
+  preLoad: 1.3,
+  error: errorimage,
+  loading: loadimage,
+  attempt: 3
+})
+
 //自定义指令-防止按钮连续点击
 Vue.directive('throttle',{
   inserted(el,binding){

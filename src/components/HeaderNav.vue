@@ -35,12 +35,13 @@
             </div>
           </div>
         </a>
-        <a class="nav_lcon nav_message" href="javascript:;"><i class='bx bx-message-square-dots bx-sm'></i></a>
+        <a class="nav_lcon nav_message" @click="toMyProfile" ><i class='bx bx-message-square-dots bx-sm'></i></a>
         <a v-if="!userImg" class="nav_lcon" @click="toLogin" ><i class='bx bx-user bx-sm' ></i></a>
         <t-popconfirm v-else
           :visible="visible"
           theme="default"
           content="是否退出登录？"
+          cancelBtn
           @visible-change="outLogin"
         >
           <a class="nav_lcon nav_user" ><img src="@/assets/user.png" class="nav_userImg" /></a>
@@ -128,6 +129,9 @@ export default {
     },
     toRanking(){
       this.$router.push('/RankingList')
+    },
+    toMyProfile(){
+      this.$router.push('/MyProfile')
     },
     goHome() {
       this.$router.push('/HomePage');

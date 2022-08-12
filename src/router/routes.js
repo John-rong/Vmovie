@@ -4,6 +4,7 @@ const UserLogin = () => import('@/pages/UserLogin')
 const DetailSearch = () => import('@/pages/DetailSearch')
 const DetailPage = () => import('@/pages/DetailPage')
 const RankingList = () => import('@/pages/RankingList')
+const MyProfile = () => import('@/pages/MyProfile')
 
 export default [
     {
@@ -30,6 +31,11 @@ export default [
         path: '/RankingList',
         component: RankingList,
         name:'RankingList'
+    },
+    {
+        path: '/MyProfile',
+        component: MyProfile,
+        name:'MyProfile'
     },
     //重定向,当访问/，立马定向到首页
     {

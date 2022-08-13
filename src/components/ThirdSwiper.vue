@@ -1,8 +1,5 @@
 <template>
 <div>
-
-    
-
     <ThirdSwiperFirst :img_third="img_third" :msg="msg"></ThirdSwiperFirst>
    <ThirdSwiperSecond></ThirdSwiperSecond>
 
@@ -46,6 +43,11 @@ export default {
                     idex: 5,
                     src: require("../assets/mesh2.png"),
                 },
+                {
+                    idex: 6,
+                   src: require("../assets/film2.jpg"),
+                }
+
             ],
         }
     }

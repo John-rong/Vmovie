@@ -4,7 +4,7 @@
         <t-row>
             <t-col v-for="(item, index) in filmItem" :key="index" :sm="12" :md="4" :lg="3" :xl="3">
                 <div class="Film-item">
-                    <a href="#">
+                    <a @click="toDetail(item.nm)">
                         <div class="block-images position-relative">
                             <div class="img-box">
                                 <img :src="item.img" class="img-fluid" alt="">
@@ -65,6 +65,9 @@ export default {
                     console.log("请求乌拉", error);
                 }
             );
+        },
+        toDetail(name){
+            this.$router.push({name:"DetailSearch",params:{filmName:name || undefined}})
         },
         //随机打乱顺序,返回任意一个电影
         shuffle(arr) {

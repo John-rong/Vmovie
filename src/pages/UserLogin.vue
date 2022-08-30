@@ -67,18 +67,28 @@ export default {
                 this.changeTitle.reverse();
             }
         },
+        isEmail(email){
+            const isEmail = /^([a-zA-Z\d])((\w|-)+\.?)+@([a-zA-Z\d]+\.)+[a-zA-Z]{2,6}$/.test(email);
+            if(!isEmail){
+                return false
+            }
+            return true
+        },
         //用户注册
         async userRegister() {
             if(!this.email || !this.password || !this.password2)  return this.$message('error', '邮箱&密码 不能为空');
+            if(!this.isEmail(this.email)) return this.$message('error', '邮箱错误...');
+            if(this.password!=this.password2) return this.$message('error', '邮箱有误或两次密码不一致...');
+            this.$message('loading', {content:'注册中',duration:500});
             try {
                 //若为空 则不提交
                 const { email, password, password2 } = this;
-                (email && password == password2) && (await this.$store.dispatch('userRegister', { email, password }));
-                this.$message('error', '邮箱有误或两次密码不一致...');
+                const username = this.email;
+                (email && password == password2) && (await this.$store.dispatch('userRegister', { username, password }));
+                this.$message('success', {content:'注册成功！请查看邮件进行激活!!!',duration:3000});
                 this.change();
             } catch (error) {
-                this.$message('error', '暂时无法注册...')
-                this.change();
+                this.$message('error', error.toString())
                 console.log(error)
             }
 
@@ -86,14 +96,18 @@ export default {
         //用户登录
         async userLogin() {
             if(!this.email || !this.password)  return this.$message('error', '邮箱&密码 不能为空');
+            if(!this.isEmail(this.email)) return this.$message('error', '邮箱错误...');
+            const msg = this.$message('loading', {content:'登录中',duration:5000});
             try {
                 const { email, password } = this;
-                const phone = this.email;
-                (email && password) && (await this.$store.dispatch('userLogin', { phone, password }));
+                const username = this.email;
+                (email && password) && (await this.$store.dispatch('userLogin', { username, password }));
+                this.$message.close(msg);
                 this.$message('success', {content:'登录成功！',duration:1500});
                 this.$router.push('/HomePage');
             } catch (error) {
-                this.$message('error', '登录失败...');
+                this.$message.close(msg);
+                this.$message('error', error.toString())
                 console.log(error);
             }
         },

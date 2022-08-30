@@ -8,10 +8,10 @@
       </video>
     </t-dialog>
 
-    <div class="wrap" v-for="(item, index) in imgs" :key="item.idx" >
+    <div class="wrap" v-for="(item, index) in imgs" :key="item.idx">
       <!-- 轮播图 -->
       <transition :name="imgAnime">
-        <img class="img-depth" v-show="curIdx === index" :key="item.idx" :src="item.src"/>
+        <img class="img-depth" v-show="curIdx === index" :key="item.idx" :src="item.src" />
       </transition>
       <!-- 轮播图文字 -->
       <t-row class="word-item">
@@ -25,11 +25,12 @@
               <div class="channel-logo"> <img class="logo_img" src="../assets/vlogo.png" alt="logo"></div>
               <h1 class="big-title">{{ item.imgFilm }}</h1>
               <div> <span class="badge badge-secondary">{{ item.filmScore }}+</span>
-                    <span class="badge">{{ item.filmTime }}</span>
+                <span class="badge">{{ item.filmTime }}</span>
               </div>
               <p class="word-detail">{{ item.filmDetail }}</p>
-              <t-button @click="tovisible(item.videoUrl)" style="background:#e50914;border: none;height: 40px;border-radius: 50px;" shape="round"
-                variant="base"><i class='bx bx-play'></i>立即播放</t-button>
+              <t-button @click="watch(item.imgFilm)"
+                style="background:#e50914;border: none;height: 40px;border-radius: 50px;" shape="round" variant="base">
+                <i class='bx bx-play'></i>立即播放</t-button>
             </div>
           </transition>
         </t-col>
@@ -60,7 +61,7 @@
 <script>
 import SwiperSvg from './SwiperSvg.vue'
 export default {
-  name:"FirstSwiper",
+  name: "FirstSwiper",
   components: { SwiperSvg },
   data() {
     return {
@@ -72,7 +73,7 @@ export default {
           filmScore: 9.5,
           filmTime: '112分钟',
           filmDetail: '殡葬师莫三妹（朱一龙 饰）在刑满释放不久后的一次出殡中，遇到了孤儿武小文（杨恩又 饰），小文的出现，意外地改变了莫三妹对职业和生活的态度。',
-          videoUrl:'https://vod.pipi.cn/fec9203cvodtransbj1251246104/9afed78b387702302563905208/v.f42905.mp4'
+          videoUrl: 'https://vod.pipi.cn/fec9203cvodtransbj1251246104/9afed78b387702302563905208/v.f42905.mp4'
         },
         {
           idx: 1,
@@ -81,16 +82,16 @@ export default {
           filmScore: 8.0,
           filmTime: '147分钟',
           filmDetail: '影片为《侏罗纪世界》系列的完结篇，故事的开篇设定在纳布拉尔岛被摧毁的四年后。如今，恐龙在世界各地与人类共同生活、共同捕猎。这一脆弱的平衡将重塑未来，并最终决定人类能否与史上最可怕生物共享这颗星球，并继续站在食物链的顶端。',
-          videoUrl:'https://vod.pipi.cn/fec9203cvodtransbj1251246104/3d5cfd24387702301752506160/v.f42905.mp4'
+          videoUrl: 'https://vod.pipi.cn/fec9203cvodtransbj1251246104/3d5cfd24387702301752506160/v.f42905.mp4'
         },
         {
           idx: 2,
-          src: require("../assets/mesh.png"),
-          imgFilm: '测试',
-          filmScore: 9.5,
-          filmTime: '112分钟',
-          filmDetail: '这是简介这是简介这是简介这是简介这是简介这是简介这是简介这是简介这是简介这是简介这是简介这是简介这是简介这是简介这是简介这是简介这是简介这是简介这是简介这是简介',
-          videoUrl:'https://vod.pipi.cn/fec9203cvodtransbj1251246104/9afed78b387702302563905208/v.f42905.mp4'
+          src: require("../assets/film4.jpg"),
+          imgFilm: '小黄人大眼萌：神偷奶爸前传',
+          filmScore: 9.1,
+          filmTime: '88分钟',
+          filmDetail: '讲述一个梦想成为全世界最强超级反派的12岁小男孩的故事。 上世纪七十年代，蓬蓬头和喇叭裤风靡之际，格鲁（史蒂夫·卡瑞尔 配音）在城郊长大。他是超强反派组合“邪恶六天王”的忠实粉丝，想要跟他们一样坏，甚至加入他们...',
+          videoUrl: 'https://vod.pipi.cn/43903a81vodtransgzp1251246104/628427f8387702298414464437/v.f42906.mp4'
         }
       ],
       curIdx: 0,
@@ -99,7 +100,7 @@ export default {
       leftAnimate: false,
       rightAnimate: false,
       visible: false,
-      visibleUrl:'',
+      visibleUrl: '',
     };
   },
   mounted() {
@@ -132,9 +133,12 @@ export default {
       let l = this.imgs.length;
       this.curIdx = ((this.curIdx + v) % l + l) % l;
     },
-    tovisible(url){
-      this.visibleUrl=url;
+    tovisible(url) {
+      this.visibleUrl = url;
       this.visible = true;
+    },
+    watch(imgFilm) {
+      this.$router.push({ name: "DetailSearch", params: { filmName: imgFilm || undefined } })
     }
   }
 }

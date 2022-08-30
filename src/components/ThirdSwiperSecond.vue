@@ -1,30 +1,31 @@
 <template>
   <div>
     <div class="third-wrap">
-        <div class="wrap">
-          <transition>
-            <img class="img-depth" src="../assets/film2.jpg">
-          </transition>
+      <div class="wrap">
+        <transition>
+          <img class="img-depth" src="../assets/film2.jpg">
+        </transition>
 
         <t-row class="third-item">
           <t-col flex="6%">
-        </t-col>
-<!--  -->
-        <t-col :xs="10" :sm="10" :md="5" :lg="5" :xl="5">
-        <transition appear>
-        <!-- <div class="channel-logo"> <img class="logo_img" src="../assets/vlogo.png" alt="logo"></div> -->
-        <!-- <h1 class="big-title">{{msg1}}</h1> -->
-        <!-- <div> <span class="badge badge-secondary">{{msg1}}+</span><span class="badge">{{msg2}}</span></div> -->
-        <!-- <p class="word-detail">{{msg3}}</p> -->
-        <t-button  style="background:#e50914;border: none;height: 40px;border-radius: 50px;" shape="round" variant="base"><i class='bx bx-play'></i>立即播放</t-button>
-        </transition>
+          </t-col>
+          <!--  -->
+          <t-col :xs="10" :sm="10" :md="5" :lg="5" :xl="5">
+            <transition appear>
+              <!-- <div class="channel-logo"> <img class="logo_img" src="../assets/vlogo.png" alt="logo"></div> -->
+              <!-- <h1 class="big-title">{{msg1}}</h1> -->
+              <!-- <div> <span class="badge badge-secondary">{{msg1}}+</span><span class="badge">{{msg2}}</span></div> -->
+              <!-- <p class="word-detail">{{msg3}}</p> -->
+              <t-button style="background:#e50914;border: none;height: 40px;border-radius: 50px;" shape="round"
+                variant="base"><i class='bx bx-play'></i>立即播放</t-button>
+            </transition>
 
 
 
-        </t-col>
+          </t-col>
         </t-row>
-        
-        </div>
+
+      </div>
     </div>
 
 
@@ -36,29 +37,29 @@
 
 <script>
 export default {
-    name:'ThirdSwiperSecond',
-    data(){
-      return{
-        msg1:"信息1",
-        msg2:"信息2",
-        msg3:"信息3",
-      }
+  name: 'ThirdSwiperSecond',
+  data() {
+    return {
+      msg1: "信息1",
+      msg2: "信息2",
+      msg3: "信息3",
     }
+  }
 }
 </script>
 
 <style lang="less" scoped>
-
 .third-wrap {
   margin: 0 6%;
   background-color: #0f2133;
+  border: 3px solid rgb(255, 255, 255);
   box-sizing: border-box;
   width: 86vw;
   height: 65vh;
   position: relative;
   overflow: hidden;
   /* 隐藏突出部分 */
-  
+
 }
 
 .wrap {
@@ -103,7 +104,8 @@ img {
   position: relative;
   overflow: hidden;
 }
-.channel-logo .logo_img{
+
+.channel-logo .logo_img {
   width: 55%;
 }
 
@@ -122,13 +124,10 @@ img {
   -webkit-text-fill-color: transparent;
 }
 
-.word-detail{
+.word-detail {
   margin: 2rem 0px;
   width: 90%;
-  line-height:2;
+  line-height: 2;
   color: rgb(223, 223, 223);
 }
-
-
-
 </style>

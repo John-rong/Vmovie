@@ -2,7 +2,7 @@
     <div class="footer">
         <div class="tdesign-demo-block-column">
             <t-row align="top" :gutter="{ xs: 8, sm: 16, md: 24, lg: 32, xl: 32, xxl: 40 }">
-                <t-col :span="3">
+                <t-col :sm="10" :md="10" :lg="3" :xl="3">
                     <div>
                         <img class="img" src="../assets/vlogo.png" title="一部好的电影，是生命在银幕上流淌" alt="vmovie">
                         <p class="mt-4">
@@ -16,7 +16,7 @@
                             <!-- <a href="#" class="s-icon">
                         <i class='bx bxl-linkedin bx-md'></i>
                     </a> -->
-                            <a href="#" class="s-icon">
+                            <a href="https://github.com/John-rong/Vmovie" target="_block" class="s-icon">
                                 <i class='bx bxl-github bx-md'></i>
                             </a>
                             <a href="#" class="s-icon">
@@ -25,7 +25,7 @@
                         </div>
                     </div>
                 </t-col>
-                <t-col :span="3">
+                <t-col :sm="10" :md="10" :lg="3" :xl="3">
                     <div>
                         <h4 class="footer-title">快速连接</h4>
                         <ul class="f-link list-unstyled">
@@ -38,7 +38,7 @@
                         </ul>
                     </div>
                 </t-col>
-                <t-col :span="3">
+                <t-col :sm="10" :md="10" :lg="3" :xl="3">
                     <div>
                         <h4 class="footer-title">重要链接</h4>
                         <ul class="f-link list-unstyled">
@@ -50,7 +50,7 @@
                         </ul>
                     </div>
                 </t-col>
-                <t-col :span="3">
+                <t-col :sm="10" :md="10" :lg="3" :xl="3">
                     <div>
                         <h4 class="footer-title">订阅</h4>
                         <p>订阅我们的以获取最新的信息</p>
@@ -63,7 +63,8 @@
                                 <div class="item">
                                     <t-button block
                                         style="background:#e50914;border: none;height: 40px;border-radius: 50px;"
-                                        shape="round" variant="base">立即订阅</t-button>
+                                        shape="round" variant="base">无法订阅
+                                    </t-button>
                                 </div>
                                 <!-- <button type="submit" class="btn btn-hover btn-block"></button> -->
                             </form>

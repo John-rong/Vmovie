@@ -10,6 +10,7 @@ const requests = axios.create({
     // baseURL: "/api",
     //请求时间 5s超时
     timeout: 5000
+    
 });
 
 //请求拦截器：发请求之前，请求拦截器可以检测到，可以在请求发出去之前拦截

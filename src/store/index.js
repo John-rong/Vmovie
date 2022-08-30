@@ -39,17 +39,34 @@ const actions = {
     },
     //用户注册
     async userRegister({ commit }, user) {
-        let result = await reqUserRegister(user);
-        console.log(result, commit)
+        let arr = [];
+        let fromuser='';
+        for (const key in user) {
+            arr.push(`${key}=${user[key]}`)
+        }
+        fromuser += arr.join('&');
+
+        let result = await reqUserRegister(fromuser);
+        console.log('注册',result, commit)
         if (result.code == 200) {
             return 'ok';
-        } else {
-            return Promise.reject(new Error('faile'))
+        }else if(result.code == 400){
+            const msg = result.meta.msg
+            return Promise.reject(new Error(msg))
+        }else {
+            return Promise.reject(new Error('注册失败...'))
         }
     },
     //用户登录
     async userLogin({ commit }, data) {
-        let result = await reqUserLogin(data);
+        let arr = [];
+        let fromData='';
+        for (const key in data) {
+            arr.push(`${key}=${data[key]}`)
+        }
+        fromData += arr.join('&');
+
+        let result = await reqUserLogin(fromData);
         console.log('用户登录', result)
         //服务器返回token
         if (result.code == 200) {
@@ -58,8 +75,11 @@ const actions = {
             //持久化存储token
             localStorage.setItem("TOKEN", result.data.token)
             return 'ok';
-        } else {
-            return Promise.reject(new Error('faile'));
+        }else if(result.code == 201 || result.code == 202 || result.code == 400){
+            const msg = result.meta.msg
+            return Promise.reject(new Error(msg));
+        }else {
+            return Promise.reject(new Error('登录失败...'));
         }
     },
     //获取用户信息
@@ -77,13 +97,16 @@ const actions = {
     //退出登录
     async userLogout({ commit }) {
         //向服务器发请求，通知服务器清除token
-        let result = await reqLogout();
-        if (result.code == 200) {
-            commit("CLEARUSER");
-            return 'ok';
-        }else{
-            return Promise.reject(new Error('faile'))
-        }
+        // let result = await reqLogout();
+        // if (result.code == 200) {
+        //     commit("CLEARUSER");
+        //     return 'ok';
+        // } else {
+        //     return Promise.reject(new Error('faile'))
+        // }
+        console.log('已退出登录',reqLogout)
+        commit("CLEARUSER");
+        return 'ok';
     }
 }
 //getters：理解为计算属性，用于简化仓库数据，让组件获得仓库的数据更加方便

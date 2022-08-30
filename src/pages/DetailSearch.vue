@@ -3,7 +3,8 @@
     <DetailTop>
       <h1>搜索</h1>
     </DetailTop>
-    <h2>搜索内容:{{ this.searchFilm }}</h2>
+    <!-- <h2>搜索内容:{{ this.searchFilm }}</h2> -->
+    <iframe :src="`https://z1.m1907.cn?jx=${this.searchFilm}`" width="100%" height="700px" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     <t-row justify="center" align="middle" class="history">
       <t-col :sm="10" :md="10" :lg="6" :xl="6">
         历史记录:
@@ -27,6 +28,7 @@ export default {
   },
   components: { DetailTop },
   mounted() {
+    this.getparams();
     this.setLocalHistory();
   },
   computed: {
@@ -38,6 +40,11 @@ export default {
     }
   },
   methods: {
+    getparams(){
+      if(this.$route.params.filmName){
+        this.$store.dispatch('searchName', this.$route.params.filmName);
+      }
+    },
     setLocalHistory() {
       //先判断
       this.getLocalKey();

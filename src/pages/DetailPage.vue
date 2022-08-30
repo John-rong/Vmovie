@@ -9,7 +9,7 @@
                     type="video/mp4">
             </video>
             <div class="video-word">
-                <h4 class="big-title1">{{filmItems.nm}}<span class="badge badge-secondary">{{filmItems.sc}}+</span></h4>
+                <h4 class="big-title1" @click="watch(filmItems.nm)">{{filmItems.nm}}<span class="badge badge-secondary">{{filmItems.sc}}+</span></h4>
                 <p>{{filmItems.dra}}
                 </p>
                 <div class="title">导演：<span> {{filmItems.dir}}</span></div>
@@ -52,6 +52,9 @@ export default {
             } else {
                 return Promise.reject(new Error('faile'));
             }
+        },
+        watch(imgFilm){
+            this.$router.push({name:"DetailSearch",params:{filmName:imgFilm || undefined}})
         }
     }
 }

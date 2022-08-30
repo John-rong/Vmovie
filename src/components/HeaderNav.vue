@@ -10,8 +10,8 @@
         <template #title>
           <span>主页</span>
         </template>
-        <t-menu-item value="1-1" @click="goHome">纯黑模式</t-menu-item>
-        <t-menu-item value="1-2" @click="goHome">月夜模式</t-menu-item>
+        <!-- <t-menu-item value="1-1" @click="goHome">纯黑模式</t-menu-item> -->
+        <t-menu-item value="1-1" @click="goHome">月夜模式</t-menu-item>
       </t-submenu>
       <t-submenu value="2">
         <template #title>
@@ -24,8 +24,8 @@
         <t-menu-item value="2-5" @click="toDetail">爱情</t-menu-item>
       </t-submenu>
       <t-menu-item value="item1" @click="toRanking">排行榜</t-menu-item>
-      <t-menu-item value="item2">电影评价</t-menu-item>
-      <t-menu-item value="item3">联系我们</t-menu-item>
+      <t-menu-item value="item2" @click="toForum">电影评价</t-menu-item>
+      <t-menu-item value="item3" @click="tocontact">联系我们</t-menu-item>
       <template #operations>
         <a class="nav_lcon nav_search" @dblclick="toSearch" @keyup.enter="toSearch">
           <!-- <i class='bx bx-search bx-sm'></i> -->
@@ -44,7 +44,7 @@
           cancelBtn
           @visible-change="outLogin"
         >
-          <a class="nav_lcon nav_user" ><img src="@/assets/user.png" class="nav_userImg" /></a>
+          <a class="nav_lcon nav_user" ><img :src="userImg" class="nav_userImg" /></a>
         </t-popconfirm>
       </template>
     </t-head-menu>
@@ -96,7 +96,7 @@ export default {
       //2.清除项目当中的数据【userinfo，token】
       //确认提示框  trigger 表示触发来源，可以根据触发来源自由控制 visible
       if (context && context.trigger === 'confirm') {
-        const msg = this.$message.info('退出中');
+        const msg = this.$message.loading('退出中');
         try {
           //退出成功
           await this.$store.dispatch('userLogout');
@@ -133,9 +133,16 @@ export default {
     toMyProfile(){
       this.$router.push('/MyProfile')
     },
+    toForum(){
+      this.$router.push('/ForumPage')
+    },
+    tocontact(){
+      this.$router.push('/ForumPage')
+      this.$message('success', '通过唠唠，联系我们噢！')
+    },
     goHome() {
       this.$router.push('/HomePage');
-    }
+    },
   }
 }
 </script>
@@ -173,6 +180,7 @@ export default {
 .nav_user {
   margin: 0px;
   .nav_userImg {
+    border-radius: 50%;
     width: 2.3vw;
     display: block;
     margin: auto 0px;

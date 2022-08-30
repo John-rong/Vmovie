@@ -32,6 +32,9 @@ export default {
     methods: {
         toDetail(){
             this.$router.push('/DetailPage')
+        },
+        watch(imgFilm){
+            this.$router.push({name:"DetailSearch",params:{filmName:imgFilm || undefined}})
         }
     }
 }

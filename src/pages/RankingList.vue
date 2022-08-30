@@ -2,6 +2,7 @@
   <div class="RankingList">
     <DetailTop>
       <h1>排行榜</h1>
+      <p>——豆瓣热播电影排行榜</p>
     </DetailTop>
 
     <t-row justify="center" class="topRow" align="middle" v-for=" (item, index) in doubanTop" :key="index">
@@ -10,7 +11,7 @@
       </t-col>
       <t-col class="topImg" :sm="3" :md="3" :lg="2" :xl="2">
         <a :href="item.url" target="_blank" v-lazy-container="{ selector: 'img' }">
-          <img referrerpolicy="no-referrer" :data-src="item.cover" />
+          <img referrerpolicy="no-referrer" :data-src="item.cover" alt="vmovie"/>
         </a>
       </t-col>
       <t-col class="topText" :sm="4" :md="4" :lg="4" :xl="4">
@@ -87,7 +88,7 @@ h1 {
     height: 100%;
 
     img {
-      width: 95%;
+      // width: 95%;
       height: 95%;
     }
   }

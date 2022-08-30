@@ -34,5 +34,9 @@ export default {
         margin: 10px 7.5%;
         font-size: 2.8rem;
     }
+    p{
+        margin:20px 7.5%;
+        color: rgb(186, 186, 186);
+    }
 }
 </style>

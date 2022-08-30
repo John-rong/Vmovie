@@ -5,6 +5,7 @@ const DetailSearch = () => import('@/pages/DetailSearch')
 const DetailPage = () => import('@/pages/DetailPage')
 const RankingList = () => import('@/pages/RankingList')
 const MyProfile = () => import('@/pages/MyProfile')
+const ForumPage = () => import('@/pages/ForumPage')
 
 export default [
     {
@@ -18,7 +19,7 @@ export default [
         name:'UserLogin'
     },
     {
-        path: '/DetailSearch',
+        path: '/DetailSearch/:filmName?',
         component: DetailSearch,
         name:'DetailSearch'
     },
@@ -36,6 +37,11 @@ export default [
         path: '/MyProfile',
         component: MyProfile,
         name:'MyProfile'
+    },
+    {
+        path: '/ForumPage',
+        component: ForumPage,
+        name:'ForumPage'
     },
     //重定向,当访问/，立马定向到首页
     {

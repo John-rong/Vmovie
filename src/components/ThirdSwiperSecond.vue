@@ -155,8 +155,8 @@ export default {
   margin: 0 auto;
   background-color: #0f2133;
   box-sizing: border-box;
-  width: 1200px;
-  height: 600px;
+  width: 70%;
+  height:650px;
   position: relative;
   overflow: hidden;
   

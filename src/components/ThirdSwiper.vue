@@ -12,7 +12,7 @@
 <script>
     import ThirdSwiperFirst from '../components/ThirdSwiperFirst.vue'
     import ThirdSwiperSecond from '../components/ThirdSwiperSecond.vue'
-    import preventReClick from '../store/preventReClick' //防多次点击，重复提交
+
 export default {
     name:'ThirdSwiper',
     components:{ThirdSwiperFirst,ThirdSwiperSecond},

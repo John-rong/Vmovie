@@ -92,7 +92,7 @@ export default {
                         this.filmItem.push(newarr[i])
                     }
                 }
-                console.log(this.filmItem);
+                // console.log(this.filmItem);
                 return 'ok';
             } else {
                 return Promise.reject(new Error('faile'));

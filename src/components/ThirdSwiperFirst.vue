@@ -9,7 +9,7 @@
                     <t-button  @click="left" class="third-button" :disabled="submissionFlag" v-preventReClick>&lt;</t-button>
                     &nbsp;
                     <t-button  @click="right" class="third-button" v-preventReClick>&gt;</t-button>
-                </div>
+                </div> 
             </div>
         </div>
 
@@ -24,7 +24,6 @@
 </template> 
 <script>
 import cloneDeep from 'lodash/cloneDeep';
-import preventReClick from '../store/preventReClick' //防多次点击，重复提交
 var _ = require('lodash');
 
 
@@ -55,7 +54,6 @@ export default {
     updated(){
         let list = document.querySelectorAll('.third-navigation-images li')
         list[this.numC].className = 'bor';
-        console.log("@@@@@",this.numC);
     },
 
 

@@ -47,7 +47,7 @@ export default {
   methods: {
     async getdouban() {
       let ranking = [];
-      ranking = await reqdbRanking();
+      ranking = await reqdbRanking(); 
       if (ranking.lenth != 0) {
         this.doubanTop = ranking.subjects;
         return 'ok'

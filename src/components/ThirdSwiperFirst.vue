@@ -3,7 +3,7 @@
         <div class="third-navigation">
             <div class="third-log">
                 <div class="third-p">
-                    <h2>高分电影</h2>
+                    <h2>即将上映</h2>
                 </div>
                 <div class="third-buttons">
                     <t-button  @click="left" class="third-button" :disabled="submissionFlag" v-preventReClick>&lt;</t-button>
@@ -15,7 +15,7 @@
 
         <div @click="uLClick($event)" class="third-navigation-images" v-throttle="1000">
             <ul>
-                <li v-for="(item,index) in images_third" :key="index"><img :src="item.src" alt="vmovie"></li>
+                <li v-for="(item,index) in images_third" :key="id"><img :src="item.img" alt="vmovie"></li>
             </ul>
 
 
@@ -44,8 +44,13 @@ export default {
         }
     },
 
+    created(){
+        console.log("111111",this.img_third);
+    },
+
     mounted() {
         this.images_third=this.img_third;
+        console.log("儿子1");
         // let list = document.querySelectorAll('.third-navigation-images li')
         // list[2].className = 'bor';
         // console.log(document.querySelectorAll('.third-navigation-images ul'));
@@ -286,7 +291,7 @@ export default {
             img {
                 cursor:pointer;
                 width: 100%;
-                height: 100%;
+                height: auto;
             }
         }
 

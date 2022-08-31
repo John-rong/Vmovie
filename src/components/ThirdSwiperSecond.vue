@@ -8,10 +8,10 @@
       </video>
     </t-dialog> -->
 
-    <div class="wrap" v-for="(item, index) in images_thirdsecond" :key="item.index" >
+    <div class="wrap" v-for="(item, index) in images_thirdsecond" :key="item.id" >
       <!-- 轮播图 -->
       <transition :name="imgAnime">
-        <img class="img-depth" v-show="curIdx === index" :key="item.index" :src="item.src"/>
+        <img class="img-depth" v-show="curIdx === index" :key="item.id" :src="item.img"/>
       </transition>
       <!-- 轮播图文字 -->
       <t-row class="word-item">
@@ -23,11 +23,12 @@
             leave-active-class="animate__fadeOut animate__faster">
             <div v-show="curIdx === index">
               <div class="channel-logo"> <img class="logo_img" src="../assets/vlogo.png" alt="logo"></div>
-              <h1 class="big-title">{{ item.imgFilm }}</h1>
-              <div> <span class="badge badge-secondary">{{ item.filmScore }}+</span>
+              <h1 class="big-title">{{ item.nm }}</h1>
+              <div> 
+                <!-- <span class="badge badge-secondary">  55  </span> -->
                     <span class="badge">{{ item.filmTime }}</span>
               </div>
-              <p class="word-detail">{{ item.filmDetail }}</p>
+              <p class="word-detail"></p>
               <!-- <t-button @click="tovisible(item.videoUrl)" style="background:#e50914;border: none;height: 40px;border-radius: 50px;" shape="round"
                 variant="base"><i class='bx bx-play'></i>立即播放</t-button> -->
                 
@@ -67,7 +68,7 @@ import cloneDeep from 'lodash/cloneDeep';
 var _ = require('lodash');
 export default {
   name:"FirstSwiper",
-  props: ["img_third",],
+  props: ["img_third","msg"],
   components: { SwiperSvg },
   data() {
     return {
@@ -110,8 +111,14 @@ export default {
       images_thirdsecond:[],
     };
   },
-  mounted() {
 
+
+  created(){
+    console.log("2222");
+  },
+
+  mounted() {
+    console.log("儿子二");
 
     this.images_thirdsecond=_.cloneDeep(this.img_third);//存图片的数组
     for(let i=0;i<2;i++){
@@ -150,15 +157,18 @@ export default {
 }
 </script>
 
-<style scoped>
+<style  lang="less" scoped>
 .img-wrap {
   margin: 0 auto;
   background-color: #0f2133;
   box-sizing: border-box;
-  width: 70%;
-  height:650px;
+  width: 85.5%;
+  height:700px;
   position: relative;
   overflow: hidden;
+  left: -1%;
+
+  margin-bottom: 50px ;
   
   /* 隐藏突出部分 */
 }
@@ -173,8 +183,9 @@ export default {
 
 img {
   user-select: none;
-  width: 100%;
-  height: 100%;
+  width:100%;
+  position:relative;
+  top: -95%;
 }
 
 .wrap:before {
@@ -191,10 +202,12 @@ img {
 
 .wrap:before {
   /* background: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, rgba(20, 20, 20, 1) 35%, rgba(83, 100, 141, 0) 100%); */
-  background: linear-gradient(90deg, rgba(0, 0, 0, 1) 1%, rgb(16 16 16) 25%, rgba(83, 100, 141, 0) 50%);
+  background: linear-gradient(90deg, rgb(0 0 0) 0%, rgb(18 18 18 / 32%) 15%, rgb(53 53 53 / 0%) 30%);
   /* width: 100%; */
   z-index: 1;
 }
+
+
 
 /* right=左to右 */
 .img-play-right-enter-active,
@@ -257,10 +270,13 @@ img {
   text-align: left;
   color: aliceblue;
   position: relative;
-  top: -120%;
+  top: -320%;
+  left: -4%;
   z-index: 98;
-  margin: 25vh 0px;
+
 }
+
+
 
 .channel-logo {
   border-left: 5px solid #e50914;
@@ -277,8 +293,11 @@ img {
 }
 
 .big-title {
-  margin: 30px 0;
-  font-size: 4rem;
+
+  width: 60px;
+
+  margin: 20px 0 0 0;
+  font-size: 3rem;
   line-height: initial;
   background: url('../assets/mesh2.png');
   background-repeat: repeat-x;

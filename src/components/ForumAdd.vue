@@ -7,7 +7,7 @@
             @fail="handleFail" theme="image" tips="请选择单张图片文件上传" accept="image/*" draggable>
         </t-upload>
         <h4>内容</h4>
-        <p>markdown语法，想唠什么写什么（↓↓↓暂时无法上传图片），随便唠唠！</p>
+        <p>markdown语法，想唠什么写什么（↓↓↓暂时无法上传图片，无法全屏），随便唠唠！</p>
         <div class="markdown">
             <div class="container">
                 <mavon-editor v-model="content" ref="md" @change="change" style="min-height: 600px;z-index: 1;" />
@@ -123,6 +123,11 @@ export default {
     border-radius: 20px;
     padding: 20px 60px;
     margin-bottom: 20px;
+
+
+    @media screen and (max-width : 992px) {
+      padding:10px 8px 0px 8px;
+    }
 
     h4 {
         font-size: 1.2rem;

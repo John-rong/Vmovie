@@ -15,7 +15,7 @@
                     <p>{{ profileInfo.introduction }}</p>
                     <t-input v-show="isupData" clearable v-model="formData.introduction" :maxlength="80"
                         :suffix="suffix" />
-                    <a href="#"><i class='bx bx-calendar-check'></i>签到</a>
+                    <a href="#"><i class='bx bx-calendar-check'></i></a>
                 </div>
             </t-col>
             <t-col class="MyProfile-right" :sm="10" :md="10" :lg="4" :xl="4">
@@ -69,7 +69,7 @@ export default {
             profileInfo: {},
             isupData: false,
             imgfile: [],
-            token:'',
+            token: '',
             formData: {
                 nickname: '',
                 sex: '',
@@ -136,21 +136,25 @@ export default {
                 arr.push(`${key}=${data[key]}`);
             }
             fromData += arr.join('&');
-
-            let result = await reqUpUserInfo(fromData);
-            if (result.code == 200) {
-                const timer = setTimeout(() => {
-                    this.$message.close(msg);
-                    this.$message('success', '已更新');
-                    clearTimeout(timer);
-                }, 500);
-            } else {
-                const timer = setTimeout(() => {
-                    this.$message.close(msg);
-                    this.$message('error', result.msg.toString())
-                    clearTimeout(timer);
-                }, 500);
+            try {
+                let result = await reqUpUserInfo(fromData);
+                if (result.code == 200) {
+                    const timer = setTimeout(() => {
+                        this.$message.close(msg);
+                        this.$message('success', '已更新');
+                        clearTimeout(timer);
+                    }, 500);
+                } else {
+                    const timer = setTimeout(() => {
+                        this.$message.close(msg);
+                        this.$message('error', result.msg.toString())
+                        clearTimeout(timer);
+                    }, 500);
+                }
+            } catch (error) {
+                this.$message.error(error.toString())
             }
+
             await this.getupData();
             this.getProfileInfo();
             this.isupData = false;

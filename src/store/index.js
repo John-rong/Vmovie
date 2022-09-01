@@ -47,7 +47,8 @@ const actions = {
         fromuser += arr.join('&');
 
         let result = await reqUserRegister(fromuser);
-        console.log('注册',result, commit)
+        console.log(commit)
+        // console.log('注册',result, commit)
         if (result.code == 200) {
             return 'ok';
         }else if(result.code == 400){
@@ -67,7 +68,7 @@ const actions = {
         fromData += arr.join('&');
 
         let result = await reqUserLogin(fromData);
-        console.log('用户登录', result)
+        // console.log('用户登录', result)
         //服务器返回token
         if (result.code == 200) {
             //在vuex保存token
@@ -85,7 +86,7 @@ const actions = {
     //获取用户信息
     async userInfo({ commit }) {
         let result = await reqUserInfo();
-        console.log('登录信息', result)
+        // console.log('登录信息', result)
         if (result.code == 200) {
             //保存用户信息
             commit("USERINFO", result.data);

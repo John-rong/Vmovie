@@ -20,7 +20,7 @@
 
 <script>
 export default {
-    name:"SwiperSvg"
+    name: "SwiperSvg"
 }
 </script>
 
@@ -59,6 +59,10 @@ export default {
             stroke-dashoffset: 0;
             opacity: 1;
         }
+    }
+
+    @media screen and (max-width : 992px) {
+        margin: 0px;
     }
 }
 

@@ -6,6 +6,7 @@ import requests from "./request";
 
 //热映电影列表 mock
 export const movieOnInfoList = () => requests({ url: 'https://console-mock.apipost.cn/app/mock/project/f4b5eed3-856b-4b0a-9ad3-f26bca3ea207/ajax/movieOnInfoList', method: 'get' });
+export const reqmovieInfoList = () => requests({ url: 'https://console-mock.apipost.cn/app/mock/project/f4b5eed3-856b-4b0a-9ad3-f26bca3ea207/comingList', method: 'get' });
 
 //狙击手电影详情 mock
 export const jujishouMovie = () => requests({ url: 'https://console-mock.apipost.cn/app/mock/project/f4b5eed3-856b-4b0a-9ad3-f26bca3ea207/jujishou', method: 'get' });

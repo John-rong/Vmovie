@@ -145,11 +145,11 @@ export default {
 
 
         .img-box {
-            width: 350px;
+            width: 95%;
             height: 100%;
 
             .img-fluid {
-                width: 350px;
+                width: 100%;
                 height: 100%;
                 border-radius: 10px;
             }

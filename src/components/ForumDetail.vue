@@ -20,8 +20,7 @@
                             <i class='bx bx-chat'></i>
                             <span @click="replylist(item.id)" class="action-text">回复</span>
                             <div v-if="replyid == item.id" class="comment-control">
-                                <t-textarea autofocus autosize v-model="replyValue" :maxlength="1000"
-                                    :suffix="suffix" />
+                                <t-input  v-model="replyValue" clearable />
                                 <t-button @click="secondComment(item.id)">发送</t-button>
                             </div>
                         </span>
@@ -29,10 +28,11 @@
 
                     <template #reply>
                         <t-comment :datetime="reply.createdAt | formatData" :content="reply.content"
-                            v-for="reply in item.replyList" :key="reply.id">
+                            v-for="reply in item.replyList" :key="reply.id" >
                             <template #author>
                                 <span>{{  reply.nickname  }}</span>
-                                <i class='bx bx-caret-right'></i>
+                                <span class="author-reply">回复</span>
+                                <i class='bx bx-chevron-right bx-tada' ></i>
                                 <span>{{  item.nickname  }}</span>
                             </template>
                         </t-comment>
@@ -40,9 +40,9 @@
                 </t-comment>
             </div>
 
-            <p>来吧，写点儿什么 <i class='bx bx-pencil'></i></p>
+            <p @click="refresh" v-throttle="1000" class="refresh"><i class='bx bx-pencil'></i> 来吧，写点儿什么 <i class='bx bx-refresh'></i>刷新</p>
             <div class="comment-control">
-                <t-textarea autofocus autosize v-model="commentValue" :maxlength="1000" :suffix="suffix" />
+                <t-textarea autofocus v-model="commentValue" :maxlength="1000" :suffix="suffix" :autosize="{ maxRows: 10 }" />
                 <t-button @click="firstComment">发送</t-button>
             </div>
         </div>
@@ -72,7 +72,6 @@ export default {
     },
     mounted() {
         window.scrollTo(0, 150);
-        this.gethtml();
         this.getcommentList();
     },
     filters: {
@@ -82,10 +81,6 @@ export default {
         }
     },
     methods: {
-        gethtml() {
-            const newtext = this.forumInfo;
-            console.log(newtext)
-        },
         async getcommentList() {
             try {
                 const commentid = this.forumInfo.commentid;
@@ -164,6 +159,13 @@ export default {
         },
         replylist(id){
             this.replyid = id;
+        },
+        notreplylist(){
+            this.replyid = -1;
+        },
+        refresh(){
+            this.$message('info', { content: '已刷新', duration: 600 })
+            this.getcommentList();
         }
     },
     render() {
@@ -185,8 +187,9 @@ export default {
     h4 {
         color: #fa183d;
         font-size: 4rem;
-        padding: 20px 0px;
-        margin: 0px auto;
+        margin: 20px auto;
+        line-height: 100%;
+        line-break: anywhere;
     }
 
     h3 {
@@ -202,9 +205,16 @@ export default {
         color: rgb(212, 212, 212);
         text-decoration: none;
     }
+    span{
+        font-size: 0.5rem;
+        line-height: 100%;
+        line-break: anywhere;
+    }
 
     .forum-html {
         font-size: 1rem;
+        line-height: 150%;
+        line-break: anywhere;
     }
 
     .comment {
@@ -222,5 +232,19 @@ export default {
     .action-text {
         margin: 0px 30px 0px 5px;
     }
+    .author-reply{
+        color: rgb(177, 177, 177);
+        font-size: 1rem;
+        margin: 5px 0px 5px 10px;
+    }
+    .refresh{
+        &:hover{
+            color: #fa183d;
+        }
+    }
+}
+
+.phone-reply{
+    margin-left: 0px;
 }
 </style>

@@ -2,8 +2,10 @@
   <div>
     <FirstSwiper></FirstSwiper>
     <FilmItem></FilmItem>
-    <SecondSwiper></SecondSwiper>
-    <ThirdSwiper></ThirdSwiper>
+    <keep-alive>
+      <SecondSwiper></SecondSwiper>
+      <ThirdSwiper></ThirdSwiper>
+    </keep-alive>
   </div>
 </template>
 

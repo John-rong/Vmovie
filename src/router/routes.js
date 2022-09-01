@@ -1,5 +1,5 @@
 //引入路由组件
-import HomePage from '@/pages/HomePage'
+const HomePage = () => import('@/pages/HomePage')
 const UserLogin = () => import('@/pages/UserLogin')
 const DetailSearch = () => import('@/pages/DetailSearch')
 const DetailPage = () => import('@/pages/DetailPage')

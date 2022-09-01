@@ -68,7 +68,7 @@ export default {
       imgs: [
         {
           idx: 0,
-          src: require("../assets/film2.jpg"),
+          src: require("../assets/film2.webp"),
           imgFilm: '人生大事',
           filmScore: 9.5,
           filmTime: '112分钟',
@@ -77,7 +77,7 @@ export default {
         },
         {
           idx: 1,
-          src: require("../assets/film3.png"),
+          src: require("../assets/film3.webp"),
           imgFilm: '侏罗纪世界3',
           filmScore: 8.0,
           filmTime: '147分钟',
@@ -86,7 +86,7 @@ export default {
         },
         {
           idx: 2,
-          src: require("../assets/film4.jpg"),
+          src: require("../assets/film4.webp"),
           imgFilm: '小黄人大眼萌：神偷奶爸前传',
           filmScore: 9.1,
           filmTime: '88分钟',

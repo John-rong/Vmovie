@@ -1,19 +1,39 @@
 <template>
   <div class="box" @scroll="scrollY">
+    <!-- 移动端菜单栏 -->
+    <t-drawer :visible.sync="phoneVisible" placement="top" header="菜单" :footer="false" showInAttachedElement>
+      <t-button theme="primary" @click="goHome" block class="phoneVisible">
+        <i class='bx bxs-home' ></i>
+        主页
+      </t-button>
+      <t-button theme="primary" @click="toDetail" block class="phoneVisible">
+        <i class='bx bxs-game' ></i>
+        狙击手
+      </t-button>
+      <t-button theme="primary" @click="toRanking" block class="phoneVisible">
+        <i class='bx bxs-trophy' ></i>
+        排行榜
+      </t-button>
+      <t-button theme="primary" @click="toForum" block class="phoneVisible">
+        <i class='bx bxs-chat' ></i>
+        唠唠
+      </t-button>
+    </t-drawer>
 
     <t-head-menu defaultValue="1-1" theme="dark" expandType="popup"
       class="nav_all animate__animated animate__fadeInDown" :class="{ 'nav_all_bg': isFixed }">
       <template #logo>
+        <i class='bx bx-menu phone-submenu' @click="phoneVisible = true"></i>
         <img @click="goHome" class="logo_img" width="136" src="../assets/vlogo.png" alt="logo">
       </template>
-      <t-submenu value="1">
+      <t-submenu value="1" class="sub-menu">
         <template #title>
           <span>主页</span>
         </template>
         <!-- <t-menu-item value="1-1" @click="goHome">纯黑模式</t-menu-item> -->
         <t-menu-item value="1-1" @click="goHome">月夜模式</t-menu-item>
       </t-submenu>
-      <t-submenu value="2">
+      <t-submenu value="2" class="sub-menu">
         <template #title>
           <span>类型</span>
         </template>
@@ -23,9 +43,9 @@
         <t-menu-item value="2-4" @click="toDetail">冒险</t-menu-item>
         <t-menu-item value="2-5" @click="toDetail">爱情</t-menu-item>
       </t-submenu>
-      <t-menu-item value="item1" @click="toRanking">排行榜</t-menu-item>
-      <t-menu-item value="item2" @click="toForum">电影评价</t-menu-item>
-      <t-menu-item value="item3" @click="tocontact">联系我们</t-menu-item>
+      <t-menu-item value="item1" class="sub-menu" @click="toRanking">排行榜</t-menu-item>
+      <t-menu-item value="item2" class="sub-menu" @click="toForum">电影评价</t-menu-item>
+      <t-menu-item value="item3" class="sub-menu" @click="tocontact">联系我们</t-menu-item>
       <template #operations>
         <a class="nav_lcon nav_search" @dblclick="toSearch" @keyup.enter="toSearch">
           <!-- <i class='bx bx-search bx-sm'></i> -->
@@ -35,16 +55,10 @@
             </div>
           </div>
         </a>
-        <a class="nav_lcon nav_message" @click="toMyProfile" ><i class='bx bx-message-square-dots bx-sm'></i></a>
-        <a v-if="!userImg" class="nav_lcon" @click="toLogin" ><i class='bx bx-user bx-sm' ></i></a>
-        <t-popconfirm v-else
-          :visible="visible"
-          theme="default"
-          content="是否退出登录？"
-          cancelBtn
-          @visible-change="outLogin"
-        >
-          <a class="nav_lcon nav_user" ><img :src="userImg" class="nav_userImg" /></a>
+        <a class="nav_lcon nav_message" @click="toMyProfile"><i class='bx bx-message-square-dots bx-sm'></i></a>
+        <a v-if="!userImg" class="nav_lcon" @click="toLogin" ><i class='bx bx-user bx-sm'></i></a>
+        <t-popconfirm v-else :visible="visible" theme="default" content="是否退出登录？" cancelBtn @visible-change="outLogin">
+          <a class="nav_lcon nav_user"><img :src="userImg" class="nav_userImg" /></a>
         </t-popconfirm>
       </template>
     </t-head-menu>
@@ -62,7 +76,9 @@ export default {
       //搜索值
       mySearch: '',
       //退出登录确认提示
-      visible:false
+      visible: false,
+      phoneVisible: false,
+
     }
   },
   mounted() {
@@ -103,10 +119,10 @@ export default {
           //回到首页
           this.$router.push('/HomePage')
           const timer = setTimeout(() => {
-          this.$message.close(msg);
-          this.$message.success('已退出登录！');
-          this.visible = false;
-          clearTimeout(timer);
+            this.$message.close(msg);
+            this.$message.success('已退出登录！');
+            this.visible = false;
+            clearTimeout(timer);
           }, 500);
         } catch (error) {
           console.log(error)
@@ -124,19 +140,19 @@ export default {
       this.$store.dispatch('searchName', this.mySearch);
       this.$router.push('/DetailSearch');
     },
-    toDetail(){
+    toDetail() {
       this.$router.push('/DetailPage');
     },
-    toRanking(){
+    toRanking() {
       this.$router.push('/RankingList')
     },
-    toMyProfile(){
+    toMyProfile() {
       this.$router.push('/MyProfile')
     },
-    toForum(){
+    toForum() {
       this.$router.push('/ForumPage')
     },
-    tocontact(){
+    tocontact() {
       this.$router.push('/ForumPage')
       this.$message('success', '通过唠唠，联系我们噢！')
     },
@@ -159,6 +175,24 @@ export default {
   // background-color: #0f2133;
   // display: flex;
   // justify-content:space-between;
+
+  .phone-submenu {
+    display: none;
+
+    @media screen and (max-width : 992px) {
+      display: block;
+    }
+  }
+
+  .sub-menu {
+    @media screen and (max-width : 992px) {
+      display: none;
+    }
+  }
+}
+
+.phoneVisible{
+  margin-top: 10px;
 }
 
 .nav_all_bg {
@@ -179,11 +213,16 @@ export default {
 
 .nav_user {
   margin: 0px;
+
   .nav_userImg {
     border-radius: 50%;
     width: 2.3vw;
     display: block;
     margin: auto 0px;
+
+    @media screen and (max-width : 992px) {
+      width: 8vw;
+    }
   }
 }
 

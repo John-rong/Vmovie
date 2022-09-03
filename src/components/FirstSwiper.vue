@@ -59,6 +59,7 @@
 </template>
 
 <script>
+import store from '@/store';
 import SwiperSvg from './SwiperSvg.vue'
 export default {
   name: "FirstSwiper",
@@ -103,7 +104,11 @@ export default {
       visibleUrl: '',
     };
   },
+  created() {
+    store.dispatch('endLoading');
+  },
   mounted() {
+    store.dispatch('beginLoading');
     this.newTimer();
   },
   methods: {
@@ -139,6 +144,7 @@ export default {
     },
     watch(imgFilm) {
       this.$router.push({ name: "DetailSearch", params: { filmName: imgFilm || undefined } })
+      this.$store.dispatch('searchName', imgFilm);
     }
   }
 }
@@ -331,7 +337,6 @@ img {
 /* 左右箭头 */
 .slide {
   position: relative;
-  -webkit-transition: 1s;
   transition: 1s;
 }
 
@@ -347,7 +352,6 @@ img {
 
 .slick-nav.prev-arrow {
   left: 2%;
-  -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
   z-index: 999;
 }
@@ -379,38 +383,31 @@ img {
   background: white;
   margin: -1px 0 0 -5px;
   display: block;
-  -webkit-transform-origin: 9px 50%;
   transform-origin: 9px 50%;
 }
 
 .slick-nav i:before {
-  -webkit-transform: rotate(-40deg);
   transform: rotate(-40deg);
 }
 
 .slick-nav i:after {
-  -webkit-transform: rotate(40deg);
   transform: rotate(40deg);
 }
 
 .slick-nav.animate svg {
   color: #fff;
-  -webkit-animation: stroke 1s ease forwards .3s;
   animation: stroke 1s ease forwards .3s;
 }
 
 .slick-nav.animate i {
-  -webkit-animation: arrow 1.2s ease forwards;
   animation: arrow 1.2s ease forwards;
 }
 
 .slick-nav.animate i:before {
-  -webkit-animation: arrowUp 1.2s ease forwards;
   animation: arrowUp 1.2s ease forwards;
 }
 
 .slick-nav.animate i:after {
-  -webkit-animation: arrowDown 1.2s ease forwards;
   animation: arrowDown 1.2s ease forwards;
 }
 
@@ -418,27 +415,23 @@ img {
 
   0%,
   100% {
-    -webkit-transform: translateX(0);
     transform: translateX(0);
     opacity: 1;
   }
 
   23% {
-    -webkit-transform: translateX(17px);
     transform: translateX(17px);
     opacity: 1;
   }
 
   24%,
   80% {
-    -webkit-transform: translateX(-22px);
     transform: translateX(-22px);
     opacity: 0;
   }
 
   81% {
     opacity: 1;
-    -webkit-transform: translateX(-22px);
     transform: translateX(-22px);
   }
 }
@@ -448,13 +441,11 @@ img {
 
   0%,
   100% {
-    -webkit-transform: rotate(-40deg) scaleX(1);
     transform: rotate(-40deg) scaleX(1);
   }
 
   20%,
   80% {
-    -webkit-transform: rotate(0deg) scaleX(0.1);
     transform: rotate(0deg) scaleX(0.1);
   }
 }
@@ -463,13 +454,11 @@ img {
 
   0%,
   100% {
-    -webkit-transform: rotate(40deg) scaleX(1);
     transform: rotate(40deg) scaleX(1);
   }
 
   20%,
   80% {
-    -webkit-transform: rotate(0deg) scaleX(0.1);
     transform: rotate(0deg) scaleX(0.1);
   }
 }

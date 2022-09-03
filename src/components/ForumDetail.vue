@@ -1,9 +1,9 @@
 <template>
     <div>
         <div class="forum-detail">
-            <h4>{{  forumInfo.title  }}</h4>
-            <p>邮箱：{{  forumInfo.username  }}</p>
-            <p>时间：{{  forumInfo.createdAt  }}</p>
+            <h4>{{ forumInfo.title }}</h4>
+            <p>邮箱：{{ forumInfo.username }}</p>
+            <p>时间：{{ forumInfo.createdAt }}</p>
             <img :src="forumInfo.leftimg" alt="vmovie">
             <div class="forum-html" v-html="forumInfo.mdhtml"></div>
             <t-divider dashed></t-divider>
@@ -17,32 +17,34 @@
                     :content="item.content">
                     <template #actions>
                         <span key="chat">
-                            <i class='bx bx-chat'></i>
+                            <i @click="replylist(item.id)" class='bx bx-chat'></i>
                             <span @click="replylist(item.id)" class="action-text">回复</span>
-                            <div v-if="replyid == item.id" class="comment-control">
-                                <t-input  v-model="replyValue" clearable />
-                                <t-button @click="secondComment(item.id)">发送</t-button>
+                            <div v-if="replyId == item.id" class="comment-control">
+                                <t-input v-model="replyValue" clearable />
+                                <t-button @click="secondComment(item.id)" class="comment-button">发送</t-button>
                             </div>
                         </span>
                     </template>
 
                     <template #reply>
                         <t-comment :datetime="reply.createdAt | formatData" :content="reply.content"
-                            v-for="reply in item.replyList" :key="reply.id" >
+                            v-for="reply in item.replyList" :key="reply.id">
                             <template #author>
-                                <span>{{  reply.nickname  }}</span>
+                                <span>{{ reply.nickname }}</span>
                                 <span class="author-reply">回复</span>
-                                <i class='bx bx-chevron-right bx-tada' ></i>
-                                <span>{{  item.nickname  }}</span>
+                                <i class='bx bx-chevron-right bx-tada'></i>
+                                <span>{{ item.nickname }}</span>
                             </template>
                         </t-comment>
                     </template>
                 </t-comment>
             </div>
 
-            <p @click="refresh" v-throttle="1000" class="refresh"><i class='bx bx-pencil'></i> 来吧，写点儿什么 <i class='bx bx-refresh'></i>刷新</p>
+            <p @click="refresh" v-throttle="1000" class="refresh"><i class='bx bx-pencil'></i> 来吧，写点儿什么 <i
+                    class='bx bx-refresh'></i>刷新</p>
             <div class="comment-control">
-                <t-textarea autofocus v-model="commentValue" :maxlength="1000" :suffix="suffix" :autosize="{ maxRows: 10 }" />
+                <t-textarea autofocus v-model="commentValue" :maxlength="1000" :suffix="suffix"
+                    :autosize="{ maxRows: 10 }" />
                 <t-button @click="firstComment">发送</t-button>
             </div>
         </div>
@@ -58,9 +60,9 @@ export default {
     data() {
         return {
             commentValue: '',
-            replyValue:'',
+            replyValue: '',
             commentList: [],
-            replyid: -1
+            replyId: -1
         }
     },
     props: ['forumInfo'],
@@ -71,7 +73,7 @@ export default {
         }
     },
     mounted() {
-        window.scrollTo(0, 150);
+        this.topscroll();
         this.getcommentList();
     },
     filters: {
@@ -92,7 +94,7 @@ export default {
                 this.$message.error(error);
             }
         },
-        async postcomment(data,status) {
+        async postcomment(data, status) {
             const msg = this.$message('loading', '发送中');
             let arr = [];
             let fromData = '';
@@ -105,18 +107,18 @@ export default {
             this.$message.close(msg);
             if (results.code == 200 && status == 0) {
                 let replys = results.data
-                replys.replyList=[]
+                replys.replyList = []
                 this.commentList.push(replys);
                 return 'ok';
-            }else if(results.code == 200 && status == 1){
-                this.commentList.map(item =>{
-                    if( item.id == data.comid) {
+            } else if (results.code == 200 && status == 1) {
+                this.commentList.map(item => {
+                    if (item.id == data.comid) {
                         console.log(item);
                         item.replyList.push(results.data);
                     }
                 })
                 return 'ok';
-            }else {
+            } else {
                 return Promise.reject(new Error('发送失败'));
             }
 
@@ -127,46 +129,49 @@ export default {
             }
             try {
                 const data = this.commentdata();
-                await this.postcomment(data,0);
+                await this.postcomment(data, 0);
             } catch (error) {
                 this.$message.error(error);
             }
         },
-        async secondComment(comid){
+        async secondComment(comid) {
             if (this.replyValue.length == 0 || this.replyValue.match(/^[ ]*$/)) {
                 return this.$message.warning('评论不能为空...');
             }
             try {
                 const data = this.commentdata(comid);
-                await this.postcomment(data,1);
-                this.replyValue='';
+                await this.postcomment(data, 1);
+                this.replyValue = '';
             } catch (error) {
                 this.$message.error(error);
             }
         },
-        commentdata(comid){
+        commentdata(comid) {
             const { commentid } = this.forumInfo;
             const { nickname } = this.userInfo;
             const leftimg = this.userInfo.headImg;
             const content = this.commentValue;
             const data = { commentid, nickname, leftimg, content };
-            if(comid){
+            if (comid) {
                 const content = this.replyValue;
                 const data = { commentid, nickname, leftimg, content, comid };
                 return data;
             }
             return data;
         },
-        replylist(id){
-            this.replyid = id;
+        replylist(id) {
+            this.replyId = id;
         },
-        notreplylist(){
-            this.replyid = -1;
+        notreplylist() {
+            this.replyId = -1;
         },
-        refresh(){
+        refresh() {
             this.$message('info', { content: '已刷新', duration: 600 })
             this.getcommentList();
-        }
+        },
+        topscroll() {
+            window.scrollTo(0, 150);
+        },
     },
     render() {
         return (
@@ -205,7 +210,8 @@ export default {
         color: rgb(212, 212, 212);
         text-decoration: none;
     }
-    span{
+
+    span {
         font-size: 0.5rem;
         line-height: 100%;
         line-break: anywhere;
@@ -227,24 +233,34 @@ export default {
 
     .comment-control {
         display: flex;
+
+        @media screen and (max-width : 992px) {
+            display: block;
+
+            .comment-button {
+                float: right;
+            }
+        }
     }
 
     .action-text {
         margin: 0px 30px 0px 5px;
     }
-    .author-reply{
+
+    .author-reply {
         color: rgb(177, 177, 177);
         font-size: 1rem;
         margin: 5px 0px 5px 10px;
     }
-    .refresh{
-        &:hover{
+
+    .refresh {
+        &:hover {
             color: #fa183d;
         }
     }
 }
 
-.phone-reply{
+.phone-reply {
     margin-left: 0px;
 }
 </style>

@@ -41,6 +41,7 @@
 
 <script>
 import DetailTop from '@/components/DetailTop.vue'
+import { Encrypt } from '@/utils/aes.js';
 import { mapState } from 'vuex'
 export default {
     name: 'UserLogin',
@@ -82,9 +83,10 @@ export default {
             this.$message('loading', {content:'注册中',duration:500});
             try {
                 //若为空 则不提交
-                const { email, password, password2 } = this;
+                // const { email, password, password2 } = this;
                 const username = this.email;
-                (email && password == password2) && (await this.$store.dispatch('userRegister', { username, password }));
+                const password = Encrypt(this.password);
+                ( username && password ) && (await this.$store.dispatch('userRegister', { username, password }));
                 this.$message('success', {content:'注册成功！请查看邮件进行激活!!!',duration:3000});
                 this.change();
             } catch (error) {
@@ -99,9 +101,9 @@ export default {
             if(!this.isEmail(this.email)) return this.$message('error', '邮箱错误...');
             const msg = this.$message('loading', {content:'登录中',duration:5000});
             try {
-                const { email, password } = this;
                 const username = this.email;
-                (email && password) && (await this.$store.dispatch('userLogin', { username, password }));
+                const password = Encrypt(this.password);
+                (username && password) && (await this.$store.dispatch('userLogin', { username, password }));
                 this.$message.close(msg);
                 this.$message('success', {content:'登录成功！',duration:1500});
                 this.$router.push('/HomePage');

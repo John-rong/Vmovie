@@ -52,7 +52,7 @@ export default {
         try {
             this.tempgetFilm();
         } catch (error) {
-            this.$message.error('热映电影获取失败'+error);
+            this.$message.error('热映电影获取失败' + error);
         }
     },
     methods: {
@@ -66,8 +66,9 @@ export default {
                 }
             );
         },
-        toDetail(name){
-            this.$router.push({name:"DetailSearch",params:{filmName:name || undefined}})
+        toDetail(name) {
+            this.$router.push({ name: "DetailSearch", params: { filmName: name || undefined } })
+            this.$store.dispatch('searchName', name);
         },
         //随机打乱顺序,返回任意一个电影
         shuffle(arr) {
@@ -82,7 +83,7 @@ export default {
         async tempgetFilm() {
             let InfoList = await movieOnInfoList();
             let arr = InfoList.movieList;
-            if (arr.length !=0 || arr != undefined) {
+            if (arr.length != 0 || arr != undefined) {
                 //保存用户信息
                 if (this.filmNum == undefined) {
                     let num = 8;
@@ -206,6 +207,12 @@ export default {
             background: rgba(255, 255, 255, 0.30);
             display: flex;
             align-items: center;
+
+            &:hover span {
+                background: #e50914;
+                color: white;
+                transition: all 0.45s ease 0s;
+            }
         }
 
         span {
@@ -228,13 +235,5 @@ export default {
         }
     }
 
-    .music-play-lists li:hover span {
-        background: #e50914;
-        color: white;
-        transition: all 0.45s ease 0s;
-        -webkit-transition: all 0.45s ease 0s;
-        -moz-transition: all 0.45s ease 0s;
-        -o-transition: all 0.45s ease 0s;
-    }
 }
 </style>

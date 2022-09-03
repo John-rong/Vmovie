@@ -28,7 +28,7 @@ export default {
   },
   components: { DetailTop },
   mounted() {
-    this.getparams();
+    // this.getparams();
     this.setLocalHistory();
   },
   computed: {

@@ -8,7 +8,8 @@ Vue.use(Vuex);
 const state = {
     searchFilm: '',
     token: localStorage.getItem('TOKEN'),
-    userInfo: ''
+    userInfo: '',
+    isloading:false
 }
 //mutation：修改state的唯一手段
 const mutations = {
@@ -29,7 +30,14 @@ const mutations = {
         state.userInfo = {};
         //清除本地存储
         localStorage.removeItem("TOKEN");
+    },
+    BEGINLOADING(state){
+        state.isloading = true;
+    },
+    ENDLOADING(state){
+        state.isloading = false;
     }
+    
 }
 //actions：处理actions，可以写自己的业务逻辑，也可以处理异步
 const actions = {
@@ -45,6 +53,7 @@ const actions = {
             arr.push(`${key}=${user[key]}`)
         }
         fromuser += arr.join('&');
+        console.log('uuuu',fromuser)
 
         let result = await reqUserRegister(fromuser);
         console.log(commit)
@@ -108,7 +117,16 @@ const actions = {
         console.log('已退出登录',reqLogout)
         commit("CLEARUSER");
         return 'ok';
+    },
+    //加载loading
+    beginLoading({commit}){
+        commit('BEGINLOADING');
+    },
+    //隐藏loading
+    endLoading({commit}){
+        commit('ENDLOADING');
     }
+
 }
 //getters：理解为计算属性，用于简化仓库数据，让组件获得仓库的数据更加方便
 const getters = {}

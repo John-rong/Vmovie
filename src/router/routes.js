@@ -1,5 +1,15 @@
-//引入路由组件
-const HomePage = () => import('@/pages/HomePage')
+import lazyLoadView from '@/utils/lazyLoadView'
+
+// //引入路由组件
+const HomePage = () => lazyLoadView(import('@/pages/HomePage'))
+// const UserLogin = () => lazyLoadView(import('@/pages/UserLogin'))
+// const DetailSearch = () => lazyLoadView(import('@/pages/DetailSearch'))
+// const DetailPage = () => lazyLoadView(import('@/pages/DetailPage'))
+// const RankingList = () => lazyLoadView(import('@/pages/RankingList'))
+// const MyProfile = () => lazyLoadView(import('@/pages/MyProfile'))
+// const ForumPage = () => lazyLoadView(import('@/pages/ForumPage'))
+
+// const HomePage = () => import('@/pages/HomePage')
 const UserLogin = () => import('@/pages/UserLogin')
 const DetailSearch = () => import('@/pages/DetailSearch')
 const DetailPage = () => import('@/pages/DetailPage')

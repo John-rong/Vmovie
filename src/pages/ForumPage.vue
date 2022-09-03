@@ -48,9 +48,9 @@
             <t-col :sm="10" :md="10" :lg="7" :xl="7" class="forum-right">
                 <div v-if="!isdetail">
                     <div class="forum-single" v-show="!isadd" v-for="(item, index) in forumList" :key="index">
-                        <a href="" class="forum-single-img"><img :src="item.leftimg" alt="vmovie"></a>
+                        <a href="javascript:void(0)" @click="todetail(item)" class="forum-single-img"><img :src="item.leftimg" alt="vmovie"></a>
                         <div class="forum-content">
-                            <a href="">
+                            <a href="javascript:void(0)" @click="todetail(item)" >
                                 <h4>{{ item.title }}</h4>
                             </a>
                             <p class="mt-2">{{ item.createdAt }}</p>

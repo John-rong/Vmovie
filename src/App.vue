@@ -1,55 +1,16 @@
 <template>
   <div id="app">
-    <div class="tdesign-demo-item--layout">
-      <t-layout>
-        <!-- background-color="#06121e"  -->
-        <t-header height="0.1px">
-          <HeaderNav></HeaderNav>
-          <!-- <t-head-menu theme="light" value="item1" height="78px">
-          </t-head-menu> -->
-        </t-header>
-        <t-content style="background:#06121e;">
-          <keep-alive include="DetailSearch,RankingList">
-            <router-view ref="content"></router-view>
-          </keep-alive>
-        </t-content>
-        <t-footer style="background:#0b1a2a; padding:2rem 6%;">
-          <FooterView></FooterView>
-          <div class="footer_bottom">
-            Copyright @ 2019-{{ new Date().getFullYear() }} Tencent. All Rights Reserved
-          </div>
-        </t-footer>
-      </t-layout>
-    </div>
+    <LayOut></LayOut>
   </div>
 </template>
 
 <script>
-import HeaderNav from './components/HeaderNav.vue'
-import FooterView from './components/FooterView.vue'
-import { LoadingPlugin } from 'tdesign-vue';
+import LayOut from './layout/LayOut.vue'
 
 export default {
   name: 'App',
   components: {
-    HeaderNav,
-    FooterView
-  },
-  created () {
-      // this.showAttach2();s
-  },
-  methods: {
-    showAttach2() {
-      const loadingAttachInstance = LoadingPlugin({
-        attach: () => this.$refs.content,
-        showOverlay: true,
-        size: '20px',
-      });
-      const timer = setTimeout(() => {
-        loadingAttachInstance.hide();
-        clearTimeout(timer);
-      }, 1000);
-    }
+    LayOut
   }
 
 }
@@ -57,11 +18,6 @@ export default {
 
 <style lang="less">
 #app {
-  // @--iq-primary: #e50914 #c9353f;
-  // @--iq-primary-hover: #bf000a #b11f26;
-  // @--iq-title-text: #23203c;
-  // @--iq-body-text: #D1D0CF;
-  // @--iq-bg1: #0b1a2a;
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   font-style: normal;
@@ -112,6 +68,17 @@ export default {
   box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
   background: #ededed;
   border-radius: 10px;
+}
+
+.loading {
+  color: aliceblue;
+  height: 100vh;
+  background-color: #06121e;
+
+  .loading-icon {
+    margin: 40vh auto;
+    font-size: 46px;
+  }
 }
 </style>
 

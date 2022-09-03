@@ -9,7 +9,7 @@
   
   一款电影推荐&在线观看的网站
 
-![image]([https://user-images.githubusercontent.com/49338067/186590858-b5af2520-3a65-46a5-8c48-0d29f34e5ef4.png](https://www.hualigs.cn/image/63133274be509.jpg))
+![image](https://www.hualigs.cn/image/6313336eae362.jpg)
 
 
 </div>

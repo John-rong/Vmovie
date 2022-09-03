@@ -16,7 +16,7 @@
 
 | 主页 :house:                                         | 演示 :beers:                                      | 文档 :memo:                                            |
 | ---------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------------ |
-| [website](https://github.com/John-rong/Vmovie) | [demo](https://github.com/John-rong/Vmovie) | [docs](https://v9d5ygbmwo.feishu.cn/docx/doxcnjyXA4CcBNW6uJ9ngUDnwqc) |
+| [website](https://github.com/John-rong/Vmovie) | [demo](http://vmovie8.tk/) | [docs](https://v9d5ygbmwo.feishu.cn/docx/doxcnjyXA4CcBNW6uJ9ngUDnwqc) |
 
 
 # :dart: 兼容环境

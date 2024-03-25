@@ -43,6 +43,7 @@ export default {
 <style scoped>
 h3 {
   margin: 40px 0 0;
+  color: var(--td-error-color-8);
 }
 ul {
   list-style-type: none;

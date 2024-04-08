@@ -7,9 +7,8 @@
             <t-col class="MyProfile-left" :sm="10" :md="10" :lg="3" :xl="3">
                 <div class="sign-user">
                     <img :src="profileInfo.headImg" alt="user">
-                    <t-upload v-show="isupData" action="http://nfq2hztm.hk2.wknwct.top/api/uploder" :headers={token}
-                        v-model="imgfile" @fail="handleFail" theme="image" tips="请选择单张图片文件上传" accept="image/*"
-                        draggable>
+                    <t-upload v-show="isupData" action="http://404fwf.tk/api/uploder" :headers={ token } v-model="imgfile"
+                        @fail="handleFail" theme="image" tips="请选择单张图片文件上传" accept="image/*" draggable>
                     </t-upload>
                     <h4>{{ profileInfo.nickname }}</h4>
                     <p>{{ profileInfo.introduction }}</p>

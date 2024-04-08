@@ -6,9 +6,8 @@
             <span class="badge">{{ filmMsg.filmTime }}</span>
         </div>
         <p class="word-detail">{{ filmMsg.filmDetail }}</p>
-        <t-button @click="tovisible()"
-            style="background:#e50914;border: none;height: 40px;border-radius: 50px;" shape="round" variant="base"><i
-                class='bx bx-play'></i>立即播放</t-button>
+        <t-button @click="tovisible()" style="background:#e50914;border: none;height: 40px;border-radius: 50px;"
+            shape="round" variant="base"><i class='bx bx-play'></i>立即播放</t-button>
     </div>
 </template>
 
@@ -17,9 +16,10 @@ export default {
     name: 'SwiperWord',
     methods: {
         tovisible() {
+            this.swiperFn()
         }
     },
-    props: ['filmMsg']
+    props: ['filmMsg', 'swiperFn']
 }
 </script>
 

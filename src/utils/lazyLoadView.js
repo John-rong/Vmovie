@@ -10,7 +10,7 @@ function lazyLoadView(AsyncView) {
         delay: 200,
         // 如果提供了超时时间且组件加载也超时了，
         // 则使用加载失败时使用的组件。默认值是：`Infinity`
-        timeout: 10000
+        timeout: 30000
     });
     return Promise.resolve({
         functional: true,

@@ -1,15 +1,23 @@
 import Vue from 'vue'
 import App from './App.vue'
 
+// //引入TDesign
+// import TDesign from 'tdesign-vue';
+// // 引入组件库全局样式资源
+// import 'tdesign-vue/es/style/index.css';
+// Vue.use(TDesign);
+import VueCompositionAPI from '@vue/composition-api';
+// 引入组件库的少量全局样式变量
+import 'tdesign-vue/es/style/index.css';
+Vue.use(VueCompositionAPI);
+
+//引入全局消息提示
+import { MessagePlugin } from 'tdesign-vue'
+Vue.prototype.$message = MessagePlugin
+
 //引入less
 import less from 'less'
 Vue.use(less)
-
-//引入TDesign
-import TDesign from 'tdesign-vue';
-// 引入组件库全局样式资源
-import 'tdesign-vue/es/style/index.css';
-Vue.use(TDesign);
 
 //引入路由
 import router from '@/router'
@@ -19,7 +27,7 @@ import store from '@/store'
 
 //引入图片懒加载
 import VueLazyload from 'vue-lazyload'
-const loadimage = require('./assets/loader-circle-regular-24.png')
+const loadimage = require('./assets/lazyLoading.png')
 const errorimage = require('./assets/vlogo.png')
 Vue.use(VueLazyload, {
   preLoad: 1.3,

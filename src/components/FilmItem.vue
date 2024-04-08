@@ -7,7 +7,7 @@
                     <a @click="toDetail(item.nm)">
                         <div class="block-images position-relative">
                             <div class="img-box">
-                                <img :src="item.img" class="img-fluid" alt="">
+                                <img v-lazy="item.img" :key="item.img" class="img-fluid" alt="">
                             </div>
                             <div class="block-description">
                                 <h2>{{ item.nm }}</h2>
@@ -67,7 +67,8 @@ export default {
             );
         },
         toDetail(name) {
-            this.$router.push({ name: "DetailSearch", params: { filmName: name || undefined } })
+            // this.$router.push({ name: "DetailSearch", params: { filmName: name || undefined } })
+            this.$router.push({ name: "DetailSearch" })
             this.$store.dispatch('searchName', name);
         },
         //随机打乱顺序,返回任意一个电影
@@ -118,6 +119,8 @@ export default {
     width: 100%;
     height: 100%;
     margin: 20px 10px 10px 0px;
+    content-visibility: auto;
+
 
     a {
         text-decoration: none;
@@ -137,8 +140,7 @@ export default {
             left: 0;
             right: 0;
             background: rgba(0, 0, 0, 0.8);
-            width: 100%;
-            height: 100%;
+            width: 98%;
             opacity: 0;
             border-radius: 10px;
             border: 3px solid #fff;

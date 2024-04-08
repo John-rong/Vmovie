@@ -4,9 +4,13 @@
       <h1>搜索</h1>
     </DetailTop>
     <!-- <h2>搜索内容:{{ this.searchFilm }}</h2> -->
-    <iframe :src="`https://z1.m1907.cn?jx=${this.searchFilm}`" width="100%" height="700px" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <iframe class="iframe-height" :src="`https://z1.m1907.top/?eps=0&jx=${this.searchFilm}`" width="100%"
+      frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <!-- <div class="iframe-box">
+      <iframe :src="`https://svip.bljiex.cc/?v=${this.searchFilm}`" @load="removeAd" name="video-vip" width="100%" class="iframe-height" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"  allowfullscreen></iframe>
+    </div> -->
     <t-row justify="center" align="middle" class="history">
-      <t-col :sm="10" :md="10" :lg="6" :xl="6">
+      <t-col :sm="10" :md="10" :lg="6" :xl="6" class="history">
         历史记录:
         <a href="#" v-for=" (item, index) in historyList" :key="index" @click="searchHistory(item)">{{ item }}</a>
         <i class='bx bx-x-circle' @click="clearHistory"></i>
@@ -30,6 +34,8 @@ export default {
   mounted() {
     // this.getparams();
     this.setLocalHistory();
+    this.getparams();
+    this.$message('success', { content: '已开启超级加速🚀', duration: 1500, placement: 'bottom' });
   },
   computed: {
     ...mapState(['searchFilm'])
@@ -40,9 +46,25 @@ export default {
     }
   },
   methods: {
-    getparams(){
-      if(this.$route.params.filmName){
+    removeAd() {
+      // let iframeBox = document.getElementById("video-vip");
+      // let _obj=iframeBox.contentWindow || iframeBox.contentDocument;
+      // let doc=_obj.document;
+      // let _box=doc.getElementById("section");
+      // console.log(_box);
+      // _box.remove();
+    },
+    getparams() {
+      if (this.$route.params.filmName) {
         this.$store.dispatch('searchName', this.$route.params.filmName);
+      }
+      console.log(this.searchFilm)
+      if (!this.searchFilm) {
+        if (this.historyList[0]) {
+          this.$store.dispatch('searchName', this.historyList[0]);
+        } else {
+          this.$store.dispatch('searchName', this.historyList[1]);
+        }
       }
     },
     setLocalHistory() {
@@ -89,13 +111,31 @@ h2 {
   color: white;
 }
 
-.history {
-  margin: 10px 0px;
-  color: rgb(122, 122, 122);
+.iframe-box {
+  position: relative;
+}
 
+.iframe-height {
+  height: 700px;
+
+  @media screen and (max-width : 992px) {
+    height: 350px;
+  }
+}
+
+.history {
+  color: rgb(122, 122, 122);
+  margin: 0px;
+
+  // @media screen and (max-width : 760px) {
+  //     background: rgb(6, 18, 30);
+  //     padding-top: 100px;
+  //     margin-top: -110px;
+  // }
   a {
+
     color: rgb(150, 150, 150);
-    margin: 0px 10px;
+    background: rgb(6, 18, 30);
     display: block;
 
     &:hover {

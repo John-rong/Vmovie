@@ -7,7 +7,7 @@
             <t-col :xs="10" :sm="10" :md="3" :lg="3" :xl="3">
                 <div class="page-login">
                     <h1>{{ state }}<span>账号</span></h1>
-                    <div  class="login">
+                    <div class="login">
                         <form action="#">
                             <div class="form-group">
                                 <p>邮箱</p>
@@ -21,15 +21,15 @@
                                     placeholder="请输入密码" autocomplete="off" required="">
                             </div>
                         </form>
-                            <div class="item">
-                                <t-button block
-                                    style="font-size: 1.2rem; font-weight: 400; letter-spacing: 10px; background:#e50914;border: none;height: 40px;border-radius: 50px;"
-                                    shape="round" variant="base" @click.prevent="submit">{{ state }}</t-button>
-                                <p>{{ changeTitle[0] }}<t-button @click="change" variant="text" theme="danger">
-                                        {{ changeTitle[1] }}</t-button>
-                                </p>
-                            </div>
-                            <!-- <button type="submit" class="btn btn-hover btn-block"></button> -->
+                        <div class="item">
+                            <t-button block
+                                style="font-size: 1.2rem; font-weight: 400; letter-spacing: 10px; background:#e50914;border: none;height: 40px;border-radius: 50px;"
+                                shape="round" variant="base" @click.prevent="submit">{{ state }}</t-button>
+                            <p>{{ changeTitle[0] }}<t-button @click="change" variant="text" theme="danger">
+                                    {{ changeTitle[1] }}</t-button>
+                            </p>
+                        </div>
+                        <!-- <button type="submit" class="btn btn-hover btn-block"></button> -->
                     </div>
                 </div>
             </t-col>
@@ -68,26 +68,26 @@ export default {
                 this.changeTitle.reverse();
             }
         },
-        isEmail(email){
+        isEmail(email) {
             const isEmail = /^([a-zA-Z\d])((\w|-)+\.?)+@([a-zA-Z\d]+\.)+[a-zA-Z]{2,6}$/.test(email);
-            if(!isEmail){
+            if (!isEmail) {
                 return false
             }
             return true
         },
         //用户注册
         async userRegister() {
-            if(!this.email || !this.password || !this.password2)  return this.$message('error', '邮箱&密码 不能为空');
-            if(!this.isEmail(this.email)) return this.$message('error', '邮箱错误...');
-            if(this.password!=this.password2) return this.$message('error', '邮箱有误或两次密码不一致...');
-            this.$message('loading', {content:'注册中',duration:500});
+            if (!this.email || !this.password || !this.password2) return this.$message('error', '邮箱&密码 不能为空');
+            if (!this.isEmail(this.email)) return this.$message('error', '邮箱错误...');
+            if (this.password != this.password2) return this.$message('error', '邮箱有误或两次密码不一致...');
+            this.$message('loading', { content: '注册中', duration: 500 });
             try {
                 //若为空 则不提交
                 // const { email, password, password2 } = this;
                 const username = this.email;
                 const password = Encrypt(this.password);
-                ( username && password ) && (await this.$store.dispatch('userRegister', { username, password }));
-                this.$message('success', {content:'注册成功！请查看邮件进行激活!!!',duration:3000});
+                (username && password) && (await this.$store.dispatch('userRegister', { username, password }));
+                this.$message('success', { content: '注册成功！请查看邮件进行激活!!!', duration: 3000 });
                 this.change();
             } catch (error) {
                 this.$message('error', error.toString())
@@ -97,15 +97,15 @@ export default {
         },
         //用户登录
         async userLogin() {
-            if(!this.email || !this.password)  return this.$message('error', '邮箱&密码 不能为空');
-            if(!this.isEmail(this.email)) return this.$message('error', '邮箱错误...');
-            const msg = this.$message('loading', {content:'登录中',duration:5000});
+            if (!this.email || !this.password) return this.$message('error', '邮箱&密码 不能为空');
+            if (!this.isEmail(this.email)) return this.$message('error', '邮箱错误...');
+            const msg = this.$message('loading', { content: '登录中', duration: 10000 });
             try {
                 const username = this.email;
                 const password = Encrypt(this.password);
                 (username && password) && (await this.$store.dispatch('userLogin', { username, password }));
                 this.$message.close(msg);
-                this.$message('success', {content:'登录成功！',duration:1500});
+                this.$message('success', { content: '登录成功！', duration: 1500 });
                 this.$router.push('/HomePage');
             } catch (error) {
                 this.$message.close(msg);

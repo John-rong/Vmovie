@@ -8,10 +8,10 @@
       </video>
     </t-dialog> -->
 
-    <div class="wrap" v-for="(item, index) in images_thirdsecond" :key="item.id" >
+    <div class="wrap" v-for="(item, index) in images_thirdsecond" :key="item.id">
       <!-- 轮播图 -->
       <transition :name="imgAnime">
-        <img class="img-depth" v-show="curIdx === index" :key="item.id" :src="item.img"/>
+        <img class="img-depth" v-show="curIdx === index" :key="item.id" v-lazy="item.img" />
       </transition>
       <!-- 轮播图文字 -->
       <t-row class="word-item">
@@ -24,14 +24,14 @@
             <div v-show="curIdx === index">
               <div class="channel-logo"> <img class="logo_img" src="../assets/vlogo.png" alt="logo"></div>
               <h1 class="big-title">{{ item.nm }}</h1>
-              <div> 
+              <div>
                 <!-- <span class="badge badge-secondary">  55  </span> -->
-                    <span class="badge">{{ item.filmTime }}</span>
+                <span class="badge">{{ item.filmTime }}</span>
               </div>
               <p class="word-detail"></p>
               <!-- <t-button @click="tovisible(item.videoUrl)" style="background:#e50914;border: none;height: 40px;border-radius: 50px;" shape="round"
                 variant="base"><i class='bx bx-play'></i>立即播放</t-button> -->
-                
+
             </div>
           </transition>
         </t-col>
@@ -63,10 +63,9 @@
 </template>
 
 <script>
-var _ = require('lodash');
 export default {
-  name:"FirstSwiper",
-  props: ["img_third","msg"],
+  name: "FirstSwiper",
+  props: ["img_third", "msg"],
   data() {
     return {
       // imgs: [
@@ -104,18 +103,18 @@ export default {
       leftAnimate: false,
       rightAnimate: false,
       visible: false,
-      visibleUrl:'',
-      images_thirdsecond:[],
+      visibleUrl: '',
+      images_thirdsecond: [],
     };
   },
 
   mounted() {
+    this.images_thirdsecond = JSON.parse(JSON.stringify(this.img_third));
 
-    this.images_thirdsecond=_.cloneDeep(this.img_third);//存图片的数组
-    for(let i=0;i<2;i++){
+    for (let i = 0; i < 2; i++) {
       this.images_thirdsecond.push(this.images_thirdsecond[i]);
     }
-    this.images_thirdsecond.splice(0,2);
+    this.images_thirdsecond.splice(0, 2);
 
 
   },
@@ -140,19 +139,20 @@ export default {
       let l = this.images_thirdsecond.length;
       this.curIdx = ((this.curIdx + v) % l + l) % l;
     },
-    tovisible(url){
-      this.visibleUrl=url;
+    tovisible(url) {
+      this.visibleUrl = url;
       this.visible = true;
     }
   }
 }
 </script>
 
-<style  lang="less" scoped>
+<style lang="less" scoped>
 .img-wrap {
   @media screen and (max-width : 992px) {
     display: none;
   }
+
   margin: 0 auto;
   background-color: #0f2133;
   box-sizing: border-box;
@@ -162,8 +162,8 @@ export default {
   overflow: hidden;
   left: -1%;
 
-  margin-bottom: 50px ;
-  
+  margin-bottom: 50px;
+
   /* 隐藏突出部分 */
 }
 
@@ -178,8 +178,10 @@ export default {
 
 img {
   user-select: none;
-  width:100%;
-  position:relative;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  // position: relative;
   top: -95%;
 }
 
@@ -265,7 +267,7 @@ img {
   text-align: left;
   color: aliceblue;
   position: relative;
-  top: -320%;
+  top: -130%;
   left: -4%;
   z-index: 98;
 
@@ -289,9 +291,8 @@ img {
 
 .big-title {
 
-  width: 60px;
-
-  margin: 20px 0 0 0;
+  writing-mode: vertical-lr;
+  height: 60vh;
   font-size: 3rem;
   line-height: initial;
   background: url('../assets/mesh2.png');

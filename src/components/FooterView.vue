@@ -6,8 +6,7 @@
                     <div>
                         <img class="img" src="../assets/vlogo.png" title="一部好的电影，是生命在银幕上流淌" alt="vmovie">
                         <p class="mt-4">
-                            And that's to never let anything stop you from chasing your dream from working or playing or
-                            falling in love.
+                            一部好的电影，是生命在银幕上流淌，是心灵在时间中飞翔，是思想在空间中穿梭，是灵魂在历史中回响。我们希望好电影能被更多的人看见！
                         </p>
                         <div class="d-flex my-4">
                             <a href="#" class="s-icon">
@@ -29,23 +28,21 @@
                     <div>
                         <h4 class="footer-title">快速连接</h4>
                         <ul class="f-link list-unstyled">
-                            <li><a href="#">关于我们</a></li>
-                            <li><a href="#">电影</a></li>
+                            <li><a href="#">电影推荐</a></li>
                             <li><a href="#">电影评价</a></li>
-                            <li><a href="#">隐私策略</a></li>
-                            <li><a href="#">条款&细则</a></li>
-                            <li><a href="#">帮助</a></li>
+                            <li><a href="#">主页</a></li>
+
+
                         </ul>
                     </div>
                 </t-col>
                 <t-col :sm="10" :md="10" :lg="3" :xl="3">
                     <div>
-                        <h4 class="footer-title">重要链接</h4>
+                        <h4 class="footer-title">最新消息</h4>
                         <ul class="f-link list-unstyled">
-                            <li><a href="#">支持</a></li>
-                            <li><a href="#">常见问题</a></li>
+                            <li><a href="#">关于我们</a></li>
                             <li><a href="#">联系我们</a></li>
-                            <li><a href="#">最新消息</a></li>
+                            <li><a href="#">消息</a></li>
                             <li><a href="#">计划</a></li>
                         </ul>
                     </div>

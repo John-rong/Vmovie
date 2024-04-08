@@ -6,22 +6,24 @@
                     <h2>即将上映</h2>
                 </div>
                 <div class="third-buttons">
-                    <t-button  @click="left" class="third-button" :disabled="submissionFlag" v-preventReClick>&lt;</t-button>
+                    <t-button @click="left" class="third-button" :disabled="submissionFlag"
+                        v-preventReClick>&lt;</t-button>
                     &nbsp;
-                    <t-button  @click="right" class="third-button" v-preventReClick>&gt;</t-button>
-                </div> 
+                    <t-button @click="right" class="third-button" v-preventReClick>&gt;</t-button>
+                </div>
             </div>
         </div>
 
         <div @click="uLClick($event)" class="third-navigation-images" v-throttle="1000">
             <ul>
-                <li v-for="(item,id) in images_third" :key="id"><img :src="item.img" alt="vmovie"></li>
+                <li v-for="(item, id) in images_third" :key="id"><img v-lazy="item.img" :key="item.img" alt="vmovie">
+                </li>
             </ul>
 
 
         </div>
     </div>
-</template> 
+</template>
 <script>
 
 export default {
@@ -35,21 +37,21 @@ export default {
             theDirection: this.direction,
             moveNum: 0,
             numC: 2,
-            images_third:[],
-            AddNumber:0,
-            submissionFlag:false, //   flase可点击  true禁止点击
+            images_third: [],
+            AddNumber: 0,
+            submissionFlag: false, //   flase可点击  true禁止点击
         }
     },
 
 
     mounted() {
-        this.images_third=this.img_third;
+        this.images_third = this.img_third;
         // let list = document.querySelectorAll('.third-navigation-images li')
         // list[2].className = 'bor';
         // console.log(document.querySelectorAll('.third-navigation-images ul'));
         // console.log("父亲的",this.images_third);
     },
-    updated(){
+    updated() {
         let list = document.querySelectorAll('.third-navigation-images li')
         list[this.numC].className = 'bor';
     },
@@ -61,7 +63,7 @@ export default {
         // ul 父盒子
         uLClick(item) {
             if (item.clientX < 650) {  //左
-                if(this.submissionFlag==false){   //  this.submissionFlag=true时，图片不可点击   this.submissionFlag=flase时,图片可以点击
+                if (this.submissionFlag == false) {   //  this.submissionFlag=true时，图片不可点击   this.submissionFlag=flase时,图片可以点击
                     this.left();
                 }
 
@@ -113,24 +115,24 @@ export default {
             // console.log("SSSSSSSSSSSSSSS",this.moveNum);
         },
 
-        
+
 
 
         left() {
             let clsNum = --this.numC;
 
             this.rightS()
-                let list = document.querySelectorAll('.third-navigation-images li')
-                for (var i = 0; i < list.length; i++) {
-                    list[i].className = ''
-                }
-                list[clsNum].className = 'bor';
+            let list = document.querySelectorAll('.third-navigation-images li')
+            for (var i = 0; i < list.length; i++) {
+                list[i].className = ''
+            }
+            list[clsNum].className = 'bor';
 
-            if(clsNum==0){  //到最左边的图片时
-                this.submissionFlag=true;   //无法继续向左边点击
-                let but=document.querySelectorAll('.third-button');  
-                but[0].style.background='rgb(165, 163, 163)';
-                    
+            if (clsNum == 0) {  //到最左边的图片时
+                this.submissionFlag = true;   //无法继续向左边点击
+                let but = document.querySelectorAll('.third-button');
+                but[0].style.background = 'rgb(165, 163, 163)';
+
             }
 
 
@@ -157,11 +159,11 @@ export default {
             // console.log(clsNum);
             this.rightchange();
 
-            
 
-            if(clsNum!=0){ 
-                this.submissionFlag=false;
-                document.querySelectorAll('.third-button')[0].style.background='red'; //将按钮1 背景颜色设置为可使用
+
+            if (clsNum != 0) {
+                this.submissionFlag = false;
+                document.querySelectorAll('.third-button')[0].style.background = 'red'; //将按钮1 背景颜色设置为可使用
             }
 
             //调用ThirdSwiperSecond组件的方法
@@ -173,19 +175,19 @@ export default {
         // leftchange(clsNum){
 
         // },
-        rightchange(){
+        rightchange() {
             //添加图片
-                this.images_third.push(this.images_third[this.AddNumber]);
-                this.AddNumber+=1;  //下次添加图片要是下一张，要不然会一直重复添加一张图片。
+            this.images_third.push(this.images_third[this.AddNumber]);
+            this.AddNumber += 1;  //下次添加图片要是下一张，要不然会一直重复添加一张图片。
         },
 
         //延迟函数
 
         //兄弟组件的方法
-        saveright(){
+        saveright() {
             this.$emit("saveright");
         },
-        saveleft(){
+        saveleft() {
             this.$emit("saveleft");
         }
 
@@ -210,8 +212,9 @@ export default {
     margin: 0px 0%;
 
     .third-navigation {
-            margin: 0px 6%;
-            padding: 0 10px 0 0;
+        margin: 0px 6%;
+        padding: 0 10px 0 0;
+
         .third-log {
             display: flex;
             justify-content: space-between;
@@ -233,7 +236,8 @@ export default {
                     border: none;
                     // background-color: rgb(165, 163, 163);
                 }
-                .third-button-disable{
+
+                .third-button-disable {
                     width: 40px;
                     border: none;
                     background-color: rgb(165, 163, 163);
@@ -278,7 +282,7 @@ export default {
             overflow: hidden;
 
             img {
-                cursor:pointer;
+                cursor: pointer;
                 width: 100%;
                 height: auto;
             }

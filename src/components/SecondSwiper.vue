@@ -2,7 +2,7 @@
     <div class="parallax-window">
         <t-row align="middle" justify="center" class="parallax-all">
             <t-col :xs="10" :sm="10" :md="4" :lg="4" :xl="4" class="parallaxt-details">
-                <SwiperWord :filmMsg="filmMsg"></SwiperWord>
+                <SwiperWord :filmMsg="filmMsg" :swiperFn="toDetail"></SwiperWord>
             </t-col>
             <t-col :xs="1" :sm="1" :md="8" :lg="8" :xl="8">
                 <div class="parallax-img" @click="toDetail">
@@ -30,11 +30,11 @@ export default {
     },
     components: { SwiperWord },
     methods: {
-        toDetail(){
-            this.$router.push('/DetailPage')
+        toDetail() {
+            this.$router.push({ name: "DetailPage" })
         },
-        watch(imgFilm){
-            this.$router.push({name:"DetailSearch",params:{filmName:imgFilm || undefined}})
+        watch(imgFilm) {
+            this.$router.push({ name: "DetailSearch", params: { filmName: imgFilm || undefined } })
         }
     }
 }

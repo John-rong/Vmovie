@@ -115,7 +115,7 @@ export default {
     newTimer() {
       this.timer = setInterval(() => {
         this.imgChange(1);
-      }, 50000);
+      }, 10000);
     },
     stopTimer() {
       clearInterval(this.timer);
@@ -143,7 +143,8 @@ export default {
       this.visible = true;
     },
     watch(imgFilm) {
-      this.$router.push({ name: "DetailSearch", params: { filmName: imgFilm || undefined } })
+      // this.$router.push({ name: "DetailSearch", params: { filmName: imgFilm || undefined } })
+      this.$router.push({ name: "DetailSearch" })
       this.$store.dispatch('searchName', imgFilm);
     }
   }
@@ -259,6 +260,7 @@ img {
   top: -100%;
   z-index: 98;
   margin: 25vh 0px;
+
 }
 
 .channel-logo {
@@ -288,6 +290,41 @@ img {
   -moz-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+@media screen and (max-width : 992px) {
+  .big-title {
+    font-size: 10vw;
+  }
+
+  .word-detail {
+    margin: 2rem 0px;
+    width: 90%;
+    line-height: 2;
+    color: rgb(223, 223, 223);
+    height: 13vh;
+    text-overflow: ellipsis;
+    overflow: auto;
+
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* 轮播图不挤压 */
+  .img-depth {
+    width: auto;
+  }
+
+  /* 左右按钮位置 */
+  .right-btn {
+    right: -6px;
+  }
+
+  .left-btn {
+    left: -6px;
+  }
 }
 
 .badge {

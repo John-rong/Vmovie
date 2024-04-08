@@ -1,5 +1,5 @@
 <template>
-    <t-content style="background:#06121e;">
+    <t-content style="background:#06121e; min-height: 85vh;">
         <keep-alive include="DetailSearch,RankingList">
             <router-view ref="content"></router-view>
         </keep-alive>
@@ -18,10 +18,9 @@ export default {
     //         store.dispatch('beginLoading');
     //         clearTimeout(timer);
     //     }, 2000);
-        
+
     // }
 }
 </script>
 
-<style>
-</style>
+<style></style>

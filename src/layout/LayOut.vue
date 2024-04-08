@@ -16,14 +16,14 @@
             <t-footer style="background:#0b1a2a; padding:2rem 6%;">
                 <FooterView></FooterView>
                 <div class="footer_bottom">
-                    Copyright @ 2019-{{ new Date().getFullYear() }} Tencent. All Rights Reserved
+                    Copyright @ 2022-{{ new Date().getFullYear() }} vmovie. All Rights Reserved
                 </div>
             </t-footer>
         </t-layout>
     </div>
 </template>
-  
-  <script>
+
+<script>
 import HeaderNav from '../components/HeaderNav.vue'
 import FooterView from '../components/FooterView.vue'
 import { mapState } from 'vuex'
@@ -42,27 +42,27 @@ export default {
 
 }
 </script>
-  
-  <style lang="less" scoped>
-  .footer_bottom {
-      border-top: 2px dashed #233A50;
-      color: #D1D0CF;
-      font-size: 14px;
-      margin-top: 2rem;
-      padding-top: 1.5rem;
-  }
-  
-  .loading {
-      color: aliceblue;
-      height: 100vh;
-      width: 100vw;
-      background-color: #06121e;
-  
-      .loading-icon {
-          margin: 40vh auto;
-          font-size: 46px;
-      }
-  }
-  </style>
-  
-  
+
+<style lang="less" scoped>
+.footer_bottom {
+    border-top: 2px dashed #233A50;
+    color: #D1D0CF;
+    font-size: 14px;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+}
+
+.loading {
+    color: aliceblue;
+    height: 100vh;
+    width: 100vw;
+    background-color: #06121e;
+
+    .loading-icon {
+        margin: 40vh auto;
+        font-size: 46px;
+    }
+}
+</style>
+
+../components/forum/FooterView.vue../components/nav/HeaderNav.vue

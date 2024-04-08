@@ -1,21 +1,21 @@
 <template>
   <div class="box" @scroll="scrollY">
     <!-- 移动端菜单栏 -->
-    <t-drawer :visible.sync="phoneVisible" placement="top" header="菜单" :footer="false" showInAttachedElement>
+    <t-drawer :visible.sync="phoneVisible" placement="top" header="菜单" :footer="false" preventScrollThrough showOverlay>
       <t-button theme="primary" @click="goHome" block class="phoneVisible">
-        <i class='bx bxs-home' ></i>
+        <i class='bx bxs-home'></i>
         主页
       </t-button>
       <t-button theme="primary" @click="toDetail" block class="phoneVisible">
-        <i class='bx bxs-game' ></i>
+        <i class='bx bxs-game'></i>
         狙击手
       </t-button>
       <t-button theme="primary" @click="toRanking" block class="phoneVisible">
-        <i class='bx bxs-trophy' ></i>
+        <i class='bx bxs-trophy'></i>
         排行榜
       </t-button>
       <t-button theme="primary" @click="toForum" block class="phoneVisible">
-        <i class='bx bxs-chat' ></i>
+        <i class='bx bxs-chat'></i>
         唠唠
       </t-button>
     </t-drawer>
@@ -56,7 +56,7 @@
           </div>
         </a>
         <a class="nav_lcon nav_message" @click="toMyProfile"><i class='bx bx-message-square-dots bx-sm'></i></a>
-        <a v-if="!userImg" class="nav_lcon" @click="toLogin" ><i class='bx bx-user bx-sm'></i></a>
+        <a v-if="!userImg" class="nav_lcon" @click="toLogin"><i class='bx bx-user bx-sm'></i></a>
         <t-popconfirm v-else :visible="visible" theme="default" content="是否退出登录？" cancelBtn @visible-change="outLogin">
           <a class="nav_lcon nav_user"><img :src="userImg" class="nav_userImg" /></a>
         </t-popconfirm>
@@ -153,8 +153,8 @@ export default {
       this.$router.push('/ForumPage')
     },
     tocontact() {
-      this.$router.push('/ForumPage')
-      this.$message('success', '通过唠唠，联系我们噢！')
+      // this.$router.push('/ForumPage')
+      this.$message('success', '通过电影评价，联系我们噢！')
     },
     goHome() {
       this.$router.push('/HomePage');
@@ -191,7 +191,7 @@ export default {
   }
 }
 
-.phoneVisible{
+.phoneVisible {
   margin-top: 10px;
 }
 

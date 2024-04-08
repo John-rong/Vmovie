@@ -9,13 +9,13 @@ const requests = axios.create({
 
     //配置对象  基础路径
     // baseURL: "/api",
-    //请求时间 5s超时
-    timeout: 5000
-    
+    //请求时间 10s超时
+    timeout: 10000
+
 });
 
 //请求拦截器：发请求之前，请求拦截器可以检测到，可以在请求发出去之前拦截
-requests.interceptors.request.use( config => {
+requests.interceptors.request.use(config => {
     // let WhiteList = ['https://console-mock.apipost.cn/app/mock/project/f4b5eed3-856b-4b0a-9ad3-f26bca3ea207/ajax/movieOnInfoList','https://console-mock.apipost.cn/app/mock/project/f4b5eed3-856b-4b0a-9ad3-f26bca3ea207/comingList','http://nfq2hztm.hk2.wknwct.top/api/userinfo']
     // let reqUrl = config.url;
     // if(WhiteList.includes(reqUrl)){
@@ -23,7 +23,7 @@ requests.interceptors.request.use( config => {
     //     reqNum++;
     // }
     //需要携带token给服务器
-    if(store.state.token){
+    if (store.state.token) {
         config.headers.token = store.state.token
     }
     return config;
